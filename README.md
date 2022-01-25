@@ -24,8 +24,8 @@
 #### &emsp;&emsp;1.  安装C++：
 &emsp;&emsp;&emsp;&emsp; **i)：**   安装相关IDE，如&emsp;&emsp;&emsp;[DEVCPP(外部下载站，请注意计算机安全)](https://sourceforge.net/projects/orwelldevcpp/) &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[VisualStudio(官网下载)](https://visualstudio.microsoft.com/zh-hans/)
 #### &emsp;&emsp;2.  安装该项目：
-&emsp;&emsp;&emsp;&emsp;&ensp; **i）：** 点击本页面克隆/下载按钮，并点击下载ZIP<br>
-&emsp;&emsp;&emsp;&emsp;&ensp; **ii）：** 下载发行版中MC粒子特效Midi播放器并解压<br>
+&emsp;&emsp;&emsp;&emsp; **i）：** 点击本页面克隆/下载按钮，并点击下载ZIP<br>
+&emsp;&emsp;&emsp;&emsp; **ii）：** 下载发行版中MC粒子特效Midi播放器并解压<br>
 #### &emsp;&emsp;3.  配置MC环境：
 &emsp;&emsp;&emsp;&emsp; **i) ：** 安装Minecraft - 1.16.5（Fabric）<br>
 &emsp;&emsp;&emsp;&emsp; **ii) ：** 下载ColorBlock（1.16.5-Fabric）[点我下载](https://www.mcbbs.net/thread-917845-1-1.html)<br>
@@ -33,9 +33,9 @@
 
 ### &emsp;一些必须了解的基础知识
 #### &emsp;&emsp;1.  MC程序基础
-&emsp;&emsp;&emsp;&emsp; **i）：** `MC刻(tick)` MC游戏的时间单位为tick，它与现实中秒的对应关系为20:1，即mc是以20的tps（tick per second）运行<br>
-&emsp;&emsp;&emsp;&emsp; **ii）：** `MCFUNCTION` MC高版本提供的一个新功能，可以简单的理解为多个指令的集合，它可以实现用一条指令执行多条指令<br>
-&emsp;&emsp;&emsp;&emsp; **iii）：** `MCDATAPACK` MC高版本新功能，数据包，可以对原版内容进行修改，可以定义自己的Mcfunction<br>
+&emsp;&emsp;&emsp;&emsp; **i）：** `MC刻(tick)` MC游戏的时间单位为tick，它与现实中秒的对应关系为20:1，&emsp;&emsp;&emsp;&emsp;即mc是以20的tps（tick per second）运行<br>
+&emsp;&emsp;&emsp;&emsp; **ii）：** `MCFUNCTION` MC高版本提供的一个新功能，可以简单的理解为多个指令的&emsp;&emsp;&emsp;&emsp;集合，它可以实现用一条指令执行多条指令<br>
+&emsp;&emsp;&emsp;&emsp; **iii）：** `MCDATAPACK` MC高版本新功能，数据包，可以对原版内容进行修改，可以&emsp;&emsp;&emsp;&emsp;定义自己的Mcfunction<br>
 #### &emsp;&emsp;2.  需要用到的MC指令
 &emsp;&emsp;&emsp;&emsp; **i）：**[execute](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/execute)<br>
 &emsp;&emsp;&emsp;&emsp; **ii）：**[scorebroad](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/scoreboard)<br>
