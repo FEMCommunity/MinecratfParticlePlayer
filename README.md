@@ -47,7 +47,7 @@
 &emsp;&emsp;&emsp;&emsp;3.  在项目中创建一个源文件（.cpp）引用Particle.h 在其下创建一个主函<br>&emsp;&emsp;&emsp;&emsp;数（main）<br>
 &emsp;&emsp;&emsp;&emsp;4.  在main函数头部写入文件打开函数，打开文件指针file1。<br>
 
-### &emsp;使用说明（带向导的自动化生成，即MCPARTICLEMIDIPLAYERMAINCONTROL.h）
+### &emsp;使用说明（带向导的自动化生成，即MCPARTICLEMIDI.....h）
 &emsp;&emsp;&emsp;&emsp;1.  按照以上方法安装完毕后，进入Minecraft - 1.16.5，新建一个地图，并<br>&emsp;&emsp;&emsp;&emsp;创建一个名为Timer的计分板。<br>
 &emsp;&emsp;&emsp;&emsp;2.  将项目中的datapack文件夹复制入新建世界的存档文件中。<br>
 &emsp;&emsp;&emsp;&emsp;3.  复制项目至一个文件夹，并在项目中创建一个源文件（.cpp）引用MCPARTI<br>&emsp;&emsp;&emsp;&emsp;CLEMIDIPLAYERMAINCONTROL.h 在其下创建一个主函数（main）。<br>
