@@ -1,58 +1,45 @@
-# 我的世界粒子特效Midi播放器
+# **我的世界粒子特效Midi播放器（以下简称MPMP）** <br><br>
 
 ## 介绍
-### 我的世界粒子特效Midi播放器（粒子特效指令音乐）生成程序（C++）
+---
+### &emsp;项目名：我的世界粒子特效Midi播放器（粒子特效指令音乐）生成程序（C++）<br>
+### &emsp;作者：训练有素的藤原白叶（藤原白葉）
 
-此函数库目前包含的基础线条：
-1.  直线（普通直线和伪倒影效果直线）
-2.  抛物线（普通抛物线和伪倒影效果抛物线与结束点圈阵的抛物线）
-3.  正弦/余弦曲线。
-4.  螺线与螺线组。
-5.  平面连续相切圆和带有Y轴的连续相切圆
-6.  笛卡尔叶形线
-7.  星型线
-8.  倒映形线条
-9.  其他内容请自行探索
+### &emsp;测试视频地址：  [ **演示1** ](https://www.bilibili.com/video/BV11y4y1L7jT)      [ **演示2** ](https://www.bilibili.com/video/BV1uT4y1P7CX)
 
-目前实现的尾部特效：
-1.  扩大的圆圈
-2.  螺旋线
-3.  星星
-4.  心形线
-5.  蝴蝶（翅膀会飞，会动的）
-6.  其他内容请自行探索
+### &emsp;软件架构：
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**1.**  仅包含.h头文件<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**2.**  需要自己创建C++（Cpp）文件并使用主函数调用头文件中函数<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**3.**  不存在.exe可执行文件（未来可能会加入）<br>
 
-此函数库计划加入：
-1.  贝塞尔曲线。
-2.  傅里叶变换曲线。
-
-
-###测试视频地址：
-[演示1](https://www.bilibili.com/video/BV11y4y1L7jT)
-[演示2](https://www.bilibili.com/video/BV1uT4y1P7CX)
-
-#### 软件架构
-仅包含.h头文件
-
-需要自己创建C++（Cpp）文件并使用主函数调用头文件中函数
-
-不存在.exe可执行文件
+### &emsp;关于
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;MPMP是一个用于制作Minecraft原版指令特效粒子的工具。<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;它可以通过MIDI的数据，自动确定坐标并生成一串mcfunction<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;以在MC中显示粒子特效连线。<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;MPMP可以简化制作MC特效音乐，省略制作过程中的重复步骤。<br> <br>
 
 ## 快速开始
+---
+### &emsp;安装
+#### &emsp;&emsp;1.  安装C++：
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i)：**   安装相关IDE，如&emsp;&emsp;&emsp;[DEVCPP(外部下载站，请注意计算机安全)](https://sourceforge.net/projects/orwelldevcpp/) &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[VisualStudio(官网下载)](https://visualstudio.microsoft.com/zh-hans/)
+#### &emsp;&emsp;2.  安装该项目：
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i）：** 点击本页面克隆/下载按钮，并点击下载ZIP<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;ii）：** 下载发行版中MC粒子特效Midi播放器并解压<br>
+#### &emsp;&emsp;3.  配置MC环境：
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i) ：** 安装Minecraft - 1.16.5（Fabric）<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;ii) ：** 下载ColorBlock（1.16.5-Fabric）[点我下载](https://www.mcbbs.net/thread-917845-1-1.html)<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **iii) ：** 按照说明中的提示调用函数<br>
 
-### 安装教程
-1.  安装带有C++语言的IDE
-2.  克隆该项目
-    i）：下载Particle_Music文件夹中所有文件
-   ii）：下载发布版本中zip并解压
-3.  安装Minecraft - 1.16.5（Fabric）
-4.  下载ColorBlock（1.16.5-Fabric）[点我下载](https://www.mcbbs.net/thread-917845-1-1.html)
-5.  按照说明中的提示调用函数
-
-#### 注意事项
-1.  调用实参为（起点X，终点X，起点Y，终点Y，起点Z，终点Z，测试数值（填10是最完美的），文件名（在本版本中无作用，是迁移高版本后遗留的参数））
-2.  需要加载colorblock Mod才可以正常运行，纯原版运行的版本由于性能原因已被淘汰（因为会生成等同你的音乐时长（秒）* 20的文件数量，会占用极大的系统内存）
-3.  需要自行创建mcfuciton的路径，总之就是你存档文件夹的datapacks里的function文件夹。
+### &emsp;一些必须了解的基础知识
+#### &emsp;&emsp;1.  MC程序基础
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i）：** `MC刻(tick)` MC游戏的时间单位为tick，它与现实中秒的对应关系为20:1，即mc是以20的tps（tick per second）运行<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;ii）：** `MCFUNCTION` MC高版本提供的一个新功能，可以简单的理解为多个指令的集合，它可以实现用一条指令执行多条指令<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **iii）：** `MCDATAPACK` MC高版本新功能，数据包，可以对原版内容进行修改，可以定义自己的Mcfunction<br>
+#### &emsp;&emsp;2.  需要用到的MC指令
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i）：**[execute](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/execute)<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;ii）：**[scorebroad](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/scoreboard)<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **iii）：**[particle](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/particle)<br>
 
 #### 使用说明（纯特效线条函数，即particle.h）
 1.  按照以上方法安装完毕后，进入Minecraft - 1.16.5，新建一个地图，并创建一个名为Timer的计分板
@@ -76,10 +63,7 @@
 7.  放入datapack的function文件夹内，进入存档，使用循环命令方块调用
 （不包含播放声音的函数，是因为大家用的音源资源包都不一样，如果需要以后会加上）
 
-#### 一些必须了解的基础知识
-1.  MC刻（tick）：MC游戏的时间单位为tick，它与现实中秒的对应关系为20:1，即mc是以20的tps（tick per second）运行
-2.  MCFUNCTION ：MC高版本提供的一个新功能，可以简单的理解为多个指令的集合，它可以实现用一条指令执行多条指令
-3.  MCDATAPACK ：MC高版本新功能，数据包，可以对原版内容进行修改，可以定义自己的Mcfunction
+
 
 #### 作者的话
 
