@@ -33,9 +33,9 @@
 
 ### &emsp;一些必须了解的基础知识
 #### &emsp;&emsp;1.  MC程序基础
-&emsp;&emsp;&emsp;&emsp; **i）：** `MC刻(tick)` MC游戏的时间单位为tick，它与现实中秒的对应关系为20:1，<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;即mc是以20的tps（tick per second）运行<br>
-&emsp;&emsp;&emsp;&emsp; **ii）：** `MCFUNCTION` MC高版本提供的一个新功能，可以简单的理解为多个指令的<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;集合，它可以实现用一条指令执行多条指令<br>
-&emsp;&emsp;&emsp;&emsp; **iii）：** `MCDATAPACK` MC高版本新功能，数据包，可以对原版内容进行修改，可以<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;定义自己的Mcfunction<br>
+&emsp;&emsp;&emsp;&emsp; **i）：** `MC刻(tick)` MC游戏的时间单位为tick，它与现实中秒的对应关系为20:1，<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;即mc是以20的tps（tick per second）运行<br>
+&emsp;&emsp;&emsp;&emsp; **ii）：** `MCFUNCTION` MC高版本提供的一个新功能，可以简单的理解为多个指令的<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;集合，它可以实现用一条指令执行多条指令<br>
+&emsp;&emsp;&emsp;&emsp; **iii）：** `MCDATAPACK` MC高版本新功能，数据包，可以对原版内容进行修改，可以<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;定义自己的Mcfunction<br>
 #### &emsp;&emsp;2.  需要用到的MC指令
 &emsp;&emsp;&emsp;&emsp; **i）：**[execute](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/execute)<br>
 &emsp;&emsp;&emsp;&emsp; **ii）：**[scorebroad](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/scoreboard)<br>
