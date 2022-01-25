@@ -2,44 +2,44 @@
 
 ## 介绍
 ---
-### &emsp;项目名：我的世界粒子特效Midi播放器（粒子特效指令音乐）生成程序（C++）<br>
+### &emsp;项目名：我的世界粒子特效Midi播放器（粒子特效指令音乐）<br>
 ### &emsp;作者：训练有素的藤原白叶（藤原白葉）
 
 ### &emsp;测试视频地址：  [ **演示1** ](https://www.bilibili.com/video/BV11y4y1L7jT)      [ **演示2** ](https://www.bilibili.com/video/BV1uT4y1P7CX)
 
 ### &emsp;软件架构：
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**1.**  仅包含.h头文件<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**2.**  需要自己创建C++（Cpp）文件并使用主函数调用头文件中函数<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**3.**  不存在.exe可执行文件（未来可能会加入）<br>
+&emsp;&emsp;&emsp;&emsp;**1.**  仅包含.h头文件<br>
+&emsp;&emsp;&emsp;&emsp;**2.**  需要自己创建C++（Cpp）文件并使用主函数调用头文件中函数<br>
+&emsp;&emsp;&emsp;&emsp;**3.**  不存在.exe可执行文件（未来可能会加入）<br>
 
 ### &emsp;关于
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;MPMP是一个用于制作Minecraft原版指令特效粒子的工具。<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;它可以通过MIDI的数据，自动确定坐标并生成一串mcfunction<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;以在MC中显示粒子特效连线。<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;MPMP可以简化制作MC特效音乐，省略制作过程中的重复步骤。<br> <br>
+&emsp;&emsp;&emsp;&emsp;MPMP是一个用于制作Minecraft原版指令特效粒子的工具。<br>
+&emsp;&emsp;&emsp;&emsp;它可以通过MIDI的数据，自动确定坐标并生成一串mcfunction<br>
+&emsp;&emsp;&emsp;&emsp;以在MC中显示粒子特效连线。<br>
+&emsp;&emsp;&emsp;&emsp;MPMP可以简化制作MC特效音乐，省略制作过程中的重复步骤。<br> <br>
 
 ## 快速开始
 ---
 ### &emsp;安装
 #### &emsp;&emsp;1.  安装C++：
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i)：**   安装相关IDE，如&emsp;&emsp;&emsp;[DEVCPP(外部下载站，请注意计算机安全)](https://sourceforge.net/projects/orwelldevcpp/) &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[VisualStudio(官网下载)](https://visualstudio.microsoft.com/zh-hans/)
+&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i)：**   安装相关IDE，如&emsp;&emsp;&emsp;[DEVCPP(外部下载站，请注意计算机安全)](https://sourceforge.net/projects/orwelldevcpp/) &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[VisualStudio(官网下载)](https://visualstudio.microsoft.com/zh-hans/)
 #### &emsp;&emsp;2.  安装该项目：
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i）：** 点击本页面克隆/下载按钮，并点击下载ZIP<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;ii）：** 下载发行版中MC粒子特效Midi播放器并解压<br>
+&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i）：** 点击本页面克隆/下载按钮，并点击下载ZIP<br>
+&emsp;&emsp;&emsp;&emsp; **&ensp;ii）：** 下载发行版中MC粒子特效Midi播放器并解压<br>
 #### &emsp;&emsp;3.  配置MC环境：
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i) ：** 安装Minecraft - 1.16.5（Fabric）<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;ii) ：** 下载ColorBlock（1.16.5-Fabric）[点我下载](https://www.mcbbs.net/thread-917845-1-1.html)<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **iii) ：** 按照说明中的提示调用函数<br>
+&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i) ：** 安装Minecraft - 1.16.5（Fabric）<br>
+&emsp;&emsp;&emsp;&emsp; **&ensp;ii) ：** 下载ColorBlock（1.16.5-Fabric）[点我下载](https://www.mcbbs.net/thread-917845-1-1.html)<br>
+&emsp;&emsp;&emsp;&emsp; **iii) ：** 按照说明中的提示调用函数<br>
 
 ### &emsp;一些必须了解的基础知识
 #### &emsp;&emsp;1.  MC程序基础
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i）：** `MC刻(tick)` MC游戏的时间单位为tick，它与现实中秒的对应关系为20:1，即mc是以20的tps（tick per second）运行<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;ii）：** `MCFUNCTION` MC高版本提供的一个新功能，可以简单的理解为多个指令的集合，它可以实现用一条指令执行多条指令<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **iii）：** `MCDATAPACK` MC高版本新功能，数据包，可以对原版内容进行修改，可以定义自己的Mcfunction<br>
+&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i）：** `MC刻(tick)` MC游戏的时间单位为tick，它与现实中秒的对应关系为20:1，即mc是以20的tps（tick per second）运行<br>
+&emsp;&emsp;&emsp;&emsp; **&ensp;ii）：** `MCFUNCTION` MC高版本提供的一个新功能，可以简单的理解为多个指令的集合，它可以实现用一条指令执行多条指令<br>
+&emsp;&emsp;&emsp;&emsp; **iii）：** `MCDATAPACK` MC高版本新功能，数据包，可以对原版内容进行修改，可以定义自己的Mcfunction<br>
 #### &emsp;&emsp;2.  需要用到的MC指令
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i）：**[execute](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/execute)<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **&ensp;ii）：**[scorebroad](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/scoreboard)<br>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; **iii）：**[particle](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/particle)<br>
+&emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i）：**[execute](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/execute)<br>
+&emsp;&emsp;&emsp;&emsp; **&ensp;ii）：**[scorebroad](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/scoreboard)<br>
+&emsp;&emsp;&emsp;&emsp; **iii）：**[particle](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/particle)<br>
 
 #### 使用说明（纯特效线条函数，即particle.h）
 1.  按照以上方法安装完毕后，进入Minecraft - 1.16.5，新建一个地图，并创建一个名为Timer的计分板
