@@ -28,17 +28,17 @@
 &emsp;&emsp;&emsp;&emsp;&ensp; **&ensp;ii）：** 下载发行版中MC粒子特效Midi播放器并解压<br>
 #### &emsp;&emsp;3.  配置MC环境：
 &emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i) ：** 安装Minecraft - 1.16.5（Fabric）<br>
-&emsp;&emsp;&emsp;&emsp;&ensp; **&ensp;ii) ：** 下载ColorBlock（1.16.5-Fabric）[点我下载](https://www.mcbbs.net/thread-917845-1-1.html)<br>
+&emsp;&emsp;&emsp;&emsp; **&ensp;ii) ：** 下载ColorBlock（1.16.5-Fabric）[点我下载](https://www.mcbbs.net/thread-917845-1-1.html)<br>
 &emsp;&emsp;&emsp;&emsp;&ensp; **iii) ：** 按照说明中的提示调用函数<br>
 
 ### &emsp;一些必须了解的基础知识
 #### &emsp;&emsp;1.  MC程序基础
 &emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i）：** `MC刻(tick)` MC游戏的时间单位为tick，它与现实中秒的对应关系为20:1，即mc是以20的tps（tick per second）运行<br>
-&emsp;&emsp;&emsp;&emsp;&ensp; **&ensp;ii）：** `MCFUNCTION` MC高版本提供的一个新功能，可以简单的理解为多个指令的集合，它可以实现用一条指令执行多条指令<br>
+&emsp;&emsp;&emsp;&emsp; **&ensp;ii）：** `MCFUNCTION` MC高版本提供的一个新功能，可以简单的理解为多个指令的集合，它可以实现用一条指令执行多条指令<br>
 &emsp;&emsp;&emsp;&emsp;&ensp; **iii）：** `MCDATAPACK` MC高版本新功能，数据包，可以对原版内容进行修改，可以定义自己的Mcfunction<br>
 #### &emsp;&emsp;2.  需要用到的MC指令
 &emsp;&emsp;&emsp;&emsp; **&ensp;&ensp;i）：**[execute](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/execute)<br>
-&emsp;&emsp;&emsp;&emsp;&ensp; **&ensp;ii）：**[scorebroad](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/scoreboard)<br>
+&emsp;&emsp;&emsp;&emsp; **&ensp;ii）：**[scorebroad](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/scoreboard)<br>
 &emsp;&emsp;&emsp;&emsp;&ensp; **iii）：**[particle](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/particle)<br>
 
 #### 使用说明（纯特效线条函数，即particle.h）
