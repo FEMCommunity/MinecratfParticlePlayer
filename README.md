@@ -20,7 +20,7 @@
 
 ## 快速开始
 ---
-### &emsp;安装
+### &emsp;安装：
 #### &emsp;&emsp;1.  安装C++：
 &emsp;&emsp;&emsp;&emsp; **i)：**   安装相关IDE，如&emsp;&emsp;&emsp;[DEVCPP(外部下载站，请注意计算机安全)](https://sourceforge.net/projects/orwelldevcpp/) &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[VisualStudio(官网下载)](https://visualstudio.microsoft.com/zh-hans/)
 #### &emsp;&emsp;2.  安装该项目：
@@ -31,38 +31,40 @@
 &emsp;&emsp;&emsp;&emsp; **ii) ：** 下载ColorBlock（1.16.5-Fabric）[点我下载](https://www.mcbbs.net/thread-917845-1-1.html)<br>
 &emsp;&emsp;&emsp;&emsp; **iii) ：** 按照说明中的提示调用函数<br>
 
-### &emsp;一些必须了解的基础知识
-#### &emsp;&emsp;1.  MC程序基础
+### &emsp;一些必须了解的基础知识：
+#### &emsp;&emsp;1.  MC程序基础：
 &emsp;&emsp;&emsp;&emsp; **i）：** `MC刻(tick)` MC游戏的时间单位为tick，它与现实中秒的对应关系为20:1，<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;即mc是以20的tps（tick per second）运行<br>
 &emsp;&emsp;&emsp;&emsp; **ii）：** `MCFUNCTION` MC高版本提供的一个新功能，可以简单的理解为多个指令的<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;集合，它可以实现用一条指令执行多条指令<br>
 &emsp;&emsp;&emsp;&emsp; **iii）：** `MCDATAPACK` MC高版本新功能，数据包，可以对原版内容进行修改，可以<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;定义自己的Mcfunction<br>
-#### &emsp;&emsp;2.  需要用到的MC指令
+#### &emsp;&emsp;2.  需要用到的MC指令：
 &emsp;&emsp;&emsp;&emsp; **i）：**[execute](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/execute)<br>
 &emsp;&emsp;&emsp;&emsp; **ii）：**[scorebroad](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/scoreboard)<br>
 &emsp;&emsp;&emsp;&emsp; **iii）：**[particle](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/particle)<br>
 
-### &emsp;使用说明（纯特效线条函数，即particle.h）
-&emsp;&emsp;&emsp;&emsp;1.  按照以上方法安装完毕后，进入Minecraft - 1.16.5，新建一个地图，<br>&emsp;&emsp;&emsp;&emsp;并创建一个名为Timer的计分板<br>
-&emsp;&emsp;&emsp;&emsp;2.  将项目中的datapack文件夹复制入新建世界的存档文件中<br>
-&emsp;&emsp;&emsp;&emsp;3.  在项目中创建一个源文件（.cpp）引用Particle.h 在其下创建一个主函<br>&emsp;&emsp;&emsp;&emsp;数（main）<br>
-&emsp;&emsp;&emsp;&emsp;4.  在main函数头部写入文件打开函数，打开文件指针file1。<br>
+### &emsp;使用说明1（纯特效线条函数，即particle.h）：
+&emsp;&emsp;&emsp;&emsp; **1.**   按照以上方法安装完毕后，进入Minecraft - 1.16.5，新建一个地图，<br>&emsp;&emsp;&emsp;&emsp;并创建一个名为Timer的计分板<br>
+&emsp;&emsp;&emsp;&emsp; **2.**   将项目中的datapack文件夹复制入新建世界的存档文件中<br>
+&emsp;&emsp;&emsp;&emsp; **3.**   在项目中创建一个源文件（.cpp）引用Particle.h 在其下创建一个主函<br>&emsp;&emsp;&emsp;&emsp;数（main）<br>
+&emsp;&emsp;&emsp;&emsp; **4.**   在main函数头部写入文件打开函数，打开文件指针file1。<br>
+&emsp;&emsp;&emsp;&emsp; **5.**   调用实参为（起点X，终点X，起点Y，终点Y，起点Z，终点Z，测试数值<br>&emsp;&emsp;&emsp;&emsp;（填10是最完美的），文件名（在本版本中无作用，是迁移高版本后遗留的参数））<br>
 
-### &emsp;使用说明（带向导的自动化生成，即MCPARTICLEMIDI.....h）
-&emsp;&emsp;&emsp;&emsp;1.  按照以上方法安装完毕后，进入Minecraft - 1.16.5，新建一个地图，并<br>&emsp;&emsp;&emsp;&emsp;创建一个名为Timer的计分板。<br>
-&emsp;&emsp;&emsp;&emsp;2.  将项目中的datapack文件夹复制入新建世界的存档文件中。<br>
-&emsp;&emsp;&emsp;&emsp;3.  复制项目至一个文件夹，并在项目中创建一个源文件（.cpp）引用MCPARTI<br>&emsp;&emsp;&emsp;&emsp;CLEMIDIPLAYERMAINCONTROL.h 在其下创建一个主函数（main）。<br>
-&emsp;&emsp;&emsp;&emsp;4.  在main函数头部调用函数StartProject（普通线条）或者StartRound（连<br>&emsp;&emsp;&emsp;&emsp;续相切圆），第一次调用会在根目录创建一个名为input.txt的文件。<br>
-&emsp;&emsp;&emsp;&emsp;5.  打开input.txt，使用工具提取Midi的音符（建议使用Audio2Minecraft）<br>&emsp;&emsp;&emsp;&emsp;将其中的起始时间一列与Midi音高一列复制入该文件（每一行为 起始时间 Midi<br>&emsp;&emsp;&emsp;&emsp;音高，如下图），需要将其中制表符替换为空格。<br>
+### &emsp;使用说明2（带向导的自动化生成，即MCPARTICLEMIDI.....h）：
+&emsp;&emsp;&emsp;&emsp; **1.**   按照以上方法安装完毕后，进入Minecraft - 1.16.5，新建一个地图，并<br>&emsp;&emsp;&emsp;&emsp;创建一个名为Timer的计分板。<br>
+&emsp;&emsp;&emsp;&emsp; **2.**   将项目中的datapack文件夹复制入新建世界的存档文件中。<br>
+&emsp;&emsp;&emsp;&emsp; **3.**   复制项目至一个文件夹，并在项目中创建一个源文件（.cpp）引用MCPARTI<br>&emsp;&emsp;&emsp;&emsp;CLEMIDIPLAYERMAINCONTROL.h 在其下创建一个主函数（main）。<br>
+&emsp;&emsp;&emsp;&emsp; **4.**   在main函数头部调用函数StartProject（普通线条）或者StartRound（连<br>&emsp;&emsp;&emsp;&emsp;续相切圆），第一次调用会在根目录创建一个名为input.txt的文件。<br>
+&emsp;&emsp;&emsp;&emsp; **5.**   打开input.txt，使用工具提取Midi的音符（建议使用Audio2Minecraft）<br>&emsp;&emsp;&emsp;&emsp;将其中的起始时间一列与Midi音高一列复制入该文件（每一行为 起始时间 Midi<br>&emsp;&emsp;&emsp;&emsp;音高，如下图），需要将其中制表符替换为空格。<br>
 ![如图](Imageimage.png)
-&emsp;&emsp;&emsp;&emsp;6.  再次运行函数，会在根目录生成一个Temp.mcfunction的文件，重命名之，将<br>&emsp;&emsp;&emsp;&emsp;其中Temp改为纯小写字母组成的字符串。<br>
-&emsp;&emsp;&emsp;&emsp;7.  放入datapack的function文件夹内，进入存档，使用循环命令方块调用<br>
+&emsp;&emsp;&emsp;&emsp; **6.**   再次运行函数，会在根目录生成一个Temp.mcfunction的文件，重命名之，将<br>&emsp;&emsp;&emsp;&emsp;其中Temp改为纯小写字母组成的字符串。<br>
+&emsp;&emsp;&emsp;&emsp; **7.**   放入datapack的function文件夹内，进入存档，使用循环命令方块调用<br>
 （不包含播放声音的函数，是因为大家用的音源资源包都不一样，如果需要以后会加上）
 
 
 
-#### 作者的话
+## 作者的话
+---
 
-目前在搞MC计算机，以及一些其他有趣的项目，所以以后可能会退坑MC音乐，Midi也不会怎么做了（我这个屑是因为对Summer Pockets的女主鳴瀬しろは的爱才去做这么多的midi），以后可能在这些地方不会再活跃。作者本人是一个物理系的大学生，但有着对音乐，美术以及编程的浓厚兴趣，而开发此项目最早只是为了帮助我处理一些视频制作中的重复性步骤，刚一开始写的代码非常垃圾，经过几次重构之后，大多数的bug都得到了修复，代码也变得勉强能看了（）。如今将这个项目开源，是希望以后能有更多人能够创作更多优秀的作品。
+本人目前在搞MC计算机，以及一些其他有趣的项目，所以以后可能会退坑MC音乐，Midi也不会怎么做了（我这个屑是因为对Summer Pockets的女主鳴瀬しろは的爱才去做这么多的midi），以后可能在这些地方不会再活跃。作者本人是一个物理系的大学生，但有着对音乐，美术以及编程的浓厚兴趣，而开发此项目最早只是为了帮助我处理一些视频制作中的重复性步骤，刚一开始写的代码非常垃圾，经过几次重构之后，大多数的bug都得到了修复，代码也变得勉强能看了（）。如今将这个项目开源，是希望以后能有更多人能够创作更多优秀的作品。
 
 这个项目开始于2018年（我刚入学高中的时候），最早的时候只是想在同学面前装个X，或者是自己做一些中看不中用的特效出来套到mc的武器上或者是套到音符盒红石音乐上，当时觉得这样非常炫酷，但是没有想法做成视频。然后到了20年的时候，我无意间看到了soma大佬的视频，然后也有了在b站发布相关视频的想法，于是就把这个项目再次从垃圾堆里捡了回来（），最早的时候是用mc的隐形实体标记粒子路径，然后进化到计算函数后使用多个mcfunction穷举坐标，最终进化到了如今的借助colorblockmod直接使用函数。
 
@@ -72,7 +74,8 @@
 
 开源这个项目是为了简化制作粒子特效音乐的过程，而不是让某些人去批量生成此类视频赶热度蹭流量，也许有人会说：“你不也是用程序生成的吗？”要知道为了做这个项目，我将mc的指令通通学了一遍，在初中学完了线性代数以及复杂曲线方程，学习了cpp编程，在计算函数并将其程序化的过程中也废了一番苦心，最最重要的是，我一般只有开发出新的粒子效果后才会发送新的视频，不存在量产。总之就是希望大家不要借着开源程序将这个圈子变得低创化。也许还会有些人，拿该项目生成的东西盈利，这种人只能提醒他注意身体了。当然这是个开源项目，想怎么用就怎么用，就是不希望有人这样用而已。
 
-#### 写在后面
+## 写在后面
+---
 
 从始至终，我一直坚持着热爱就创作的理念，不论是曾经的画作，还是如今的midi音乐到特效音乐，当你看到其他大佬创作你喜爱的东西，你不应该无动于衷，说什么“我做不到”。如果你真的热爱一件事，并投入努力去做，一定会有收获，但如果你不去做，你就只能在一旁默念“有手真好”，希望喜欢mc特效音乐的人，渴望自己制作出属于自己的特效音乐的人，能够带个我们更多的惊喜。
 
