@@ -41,26 +41,21 @@
 &emsp;&emsp;&emsp;&emsp; **ii）：**[scorebroad](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/scoreboard)<br>
 &emsp;&emsp;&emsp;&emsp; **iii）：**[particle](https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/particle)<br>
 
-#### 使用说明（纯特效线条函数，即particle.h）
-1.  按照以上方法安装完毕后，进入Minecraft - 1.16.5，新建一个地图，并创建一个名为Timer的计分板
-2.  将项目中的datapack文件夹复制入新建世界的存档文件中
-3.  在项目中创建一个源文件（.cpp）引用Particle.h 在其下创建一个主函数（main）
-4.  在main函数头部写入文件打开函数，路径大概为（???:\\你的MC路径\\.minecraft\\save\\你的存档名\\datapacks\\particlemidipiano\\data\\other_music_own\\functions\\自定义名.mcfunction）
-如果不想手动调用，在我这里有个自动调用的表格，连续相切圆使用方法如下
-![连续相切圆](https://user-images.githubusercontent.com/40709280/130440634-608ff647-5c6b-437d-8c3d-243115a2c5b2.png "连续相切圆")
-普通线条如下：
-![普通线条](https://user-images.githubusercontent.com/40709280/130440723-5d6471ec-1c3d-49ec-a505-173b3f04364f.png "普通线条")
-![最后必做的工作](https://user-images.githubusercontent.com/40709280/130440833-9e81e936-9884-4116-877e-83fa469b69f5.png "最后必做的工作")
+### &emsp;使用说明（纯特效线条函数，即particle.h）
+&emsp;&emsp;&emsp;&emsp;1.  按照以上方法安装完毕后，进入Minecraft - 1.16.5，新建一个地图，并创建一个名为Timer的计分板<br>
+&emsp;&emsp;&emsp;&emsp;2.  将项目中的datapack文件夹复制入新建世界的存档文件中<br>
+&emsp;&emsp;&emsp;&emsp;3.  在项目中创建一个源文件（.cpp）引用Particle.h 在其下创建一个主函<br>&emsp;&emsp;&emsp;&emsp;数（main）<br>
+&emsp;&emsp;&emsp;&emsp;4.  在main函数头部写入文件打开函数，打开文件指针file1。<br>
 
-#### 使用说明（带向导的自动化生成，即MCPARTICLEMIDIPLAYERMAINCONTROL.h）
-1.  按照以上方法安装完毕后，进入Minecraft - 1.16.5，新建一个地图，并创建一个名为Timer的计分板。
-2.  将项目中的datapack文件夹复制入新建世界的存档文件中。
-3.  复制项目至一个文件夹，并在项目中创建一个源文件（.cpp）引用MCPARTICLEMIDIPLAYERMAINCONTROL.h 在其下创建一个主函数（main）。
-4.  在main函数头部调用函数StartProject（普通线条）或者StartRound（连续相切圆），第一次调用会在根目录创建一个名为input.txt的文件。
-5.  打开input.txt，使用工具提取Midi的音符（建议使用Audio2Minecraft）将其中的起始时间一列与Midi音高一列复制入该文件（每一行为 起始时间 Midi音高，如下图），需要将其中制表符替换为空格。
+### &emsp;使用说明（带向导的自动化生成，即MCPARTICLEMIDIPLAYERMAINCONTROL.h）
+&emsp;&emsp;&emsp;&emsp;1.  按照以上方法安装完毕后，进入Minecraft - 1.16.5，新建一个地图，并<br>&emsp;&emsp;&emsp;&emsp;创建一个名为Timer的计分板。<br>
+&emsp;&emsp;&emsp;&emsp;2.  将项目中的datapack文件夹复制入新建世界的存档文件中。<br>
+&emsp;&emsp;&emsp;&emsp;3.  复制项目至一个文件夹，并在项目中创建一个源文件（.cpp）引用MCPARTI<br>&emsp;&emsp;&emsp;&emsp;CLEMIDIPLAYERMAINCONTROL.h 在其下创建一个主函数（main）。<br>
+&emsp;&emsp;&emsp;&emsp;4.  在main函数头部调用函数StartProject（普通线条）或者StartRound（连<br>&emsp;&emsp;&emsp;&emsp;续相切圆），第一次调用会在根目录创建一个名为input.txt的文件。<br>
+&emsp;&emsp;&emsp;&emsp;5.  打开input.txt，使用工具提取Midi的音符（建议使用Audio2Minecraft）<br>&emsp;&emsp;&emsp;&emsp;将其中的起始时间一列与Midi音高一列复制入该文件（每一行为 起始时间 Midi音高，如下图），需要将其中制表符替换为空格。<br>
 ![如图](Imageimage.png)
-6.  再次运行函数，会在根目录生成一个Temp.mcfunction的文件，重命名之，将其中Temp改为纯小写字母组成的字符串。
-7.  放入datapack的function文件夹内，进入存档，使用循环命令方块调用
+&emsp;&emsp;&emsp;&emsp;6.  再次运行函数，会在根目录生成一个Temp.mcfunction的文件，重命名之，将<br>&emsp;&emsp;&emsp;&emsp;其中Temp改为纯小写字母组成的字符串。<br>
+&emsp;&emsp;&emsp;&emsp;7.  放入datapack的function文件夹内，进入存档，使用循环命令方块调用<br>
 （不包含播放声音的函数，是因为大家用的音源资源包都不一样，如果需要以后会加上）
 
 
