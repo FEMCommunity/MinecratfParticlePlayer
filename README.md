@@ -81,12 +81,15 @@
 &emsp;&emsp;&emsp;&emsp;随机轨迹曲线<br>
 &emsp;&emsp;&emsp;&emsp;<del>七影蝶飞行</del><br>
 &emsp;&emsp;&emsp;&emsp;心形“抛物线”<br>
+&emsp;&emsp;&emsp;&emsp;导弹作为线条头部<br>
 #### &emsp;&emsp;音符特效：
 &emsp;&emsp;&emsp;&emsp;<del>扩大的圆圈</del><br>
 &emsp;&emsp;&emsp;&emsp;<del>螺旋线</del><br>
 &emsp;&emsp;&emsp;&emsp;<del>星星</del><br>
 &emsp;&emsp;&emsp;&emsp;<del>心形线</del><br>
 &emsp;&emsp;&emsp;&emsp;<del>蝴蝶（翅膀会飞，会动的）</del><br>
+&emsp;&emsp;&emsp;&emsp;米国和霓虹的城市名<br>
+&emsp;&emsp;&emsp;&emsp;爆炸特效<br>
 &emsp;&emsp;&emsp;&emsp;各种花里胡哨的特效<br>
 
 ### &emsp;MIDI：
