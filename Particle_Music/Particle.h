@@ -30,25 +30,25 @@ int init;
 long double s_qrt(long double a) {
 	return a * a;
 }
-//¹¹ÔìÁ¬ĞøÏàÇĞÔ²µÄÏòÁ¿
+//æ„é€ è¿ç»­ç›¸åˆ‡åœ†çš„å‘é‡
 struct Particle_Vector {
 	long double Vx;
 	long double Vz;
 };
-	//Ö±Ïß
+	//ç›´çº¿
 	struct Line
 	{
 		long double k;
 		long double b;
 		bool Test;
 	};
-	//µã
+	//ç‚¹
 	struct Point
 	{
 		long double z;
 		long double x;
 	};
-	//ÇóÖ±Ïß·½³Ì
+	//æ±‚ç›´çº¿æ–¹ç¨‹
 	void GetLine(long double z0, long double z1, long double x0, long double x1, Line& out_Line)
 	{
 		const long double m = z1 - z0;
@@ -65,7 +65,7 @@ struct Particle_Vector {
 			out_Line.Test = true;
 		}
 	}
-	//ÇóÖĞÎ»Ïß
+	//æ±‚ä¸­ä½çº¿
 	void GetMidLine(Line& Line_in, Line& Line_out, long double z0, long double z1, long double x0, long double x1)
 	{
 		if (!Line_in.Test)
@@ -87,7 +87,7 @@ struct Particle_Vector {
 			Line_out.Test = false;
 		}
 	}
-	//Çó½»µã
+	//æ±‚äº¤ç‚¹
 	void GetCross(Line& L1, Line& L2, Point& Cross, long double Z)
 	{
 		if ((!L1.Test) && L2.k >= -0.000001 && L2.k <= 0.000001)
@@ -118,7 +118,7 @@ struct Particle_Vector {
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
-//-------------------------------------------------------------------------------ÖÕµãÌØĞ§²¿·Ö-----------------------------------------------------------------------------------------\\
+//-------------------------------------------------------------------------------ç»ˆç‚¹ç‰¹æ•ˆéƒ¨åˆ†-----------------------------------------------------------------------------------------\\
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
 
@@ -128,22 +128,22 @@ struct Particle_Vector {
 
 
 
-//ÂİĞıÈ¦Õó
+//èºæ—‹åœˆé˜µ
 void print_round_move(long double ex, long double ey, long double ez) {
 	int x_3 = (int)ex;
-	long double COR;//RGBÑÕÉ«Í¨µÀ
-	long double COG;//RGBÑÕÉ«Í¨µÀ
-	long double COB;//RGBÑÕÉ«Í¨µÀ
+	long double COR;//RGBé¢œè‰²é€šé“
+	long double COG;//RGBé¢œè‰²é€šé“
+	long double COB;//RGBé¢œè‰²é€šé“
 
-	COR = 0.3;//Ëæ»úRGBÑÕÉ«Í¨µÀ
-	COG = 0.7;//Ëæ»úRGBÑÕÉ«Í¨µÀ
-	COB = 0.4;//Ëæ»úRGBÑÕÉ«Í¨µÀ
+	COR = 0.3;//éšæœºRGBé¢œè‰²é€šé“
+	COG = 0.7;//éšæœºRGBé¢œè‰²é€šé“
+	COB = 0.4;//éšæœºRGBé¢œè‰²é€šé“
 
 	fprintf(file1, "execute if score @p Timer matches %d run particleex tickpolarparameter minecraft:end_rod %.10f %.10f %.10f %.10f %.10f %.10f 1 0 0 0 0 2 \"s1,dis=t*10,t*1.5\" 0.01 20 25\n", x_3, ex+0.5, ey+0.5, ez+0.5, COR, COG, COB);
 
 }
 
-//Ô²È¦Õó
+//åœ†åœˆé˜µ
 void print_round(long double ex, long double ey, long double ez) {
 
 
@@ -375,6 +375,31 @@ void Eight_flower_small_flower_star(long double ex, long double ey, long double 
 	SeaStar_Flash(ex, ey, ez);
 }
 
+void brust(long double ex, long double ey, long double ez) {
+	int x_3 = (int)ex;
+	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickpolarparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 2 \"s1,dis,cr,cg,cb=0,0,random(),random(),random()\" 0.01 20 25 \"(vx, vy, vz) = ((random(), random(), random()) - 0.5) * t / 20\"\n", x_3, ex + 0.5, ey + 0.5, ez + 0.5);
+}
+
+void brust_2(long double ex, long double ey, long double ez) {
+	int x_3 = (int)ex;
+	long double COR;//RGBé¢œè‰²é€šé“
+	long double COG;//RGBé¢œè‰²é€šé“
+	long double COB;//RGBé¢œè‰²é€šé“
+	int t;
+	double S1, S2;
+	
+	
+	COR = 0.5;//éšæœºRGBé¢œè‰²é€šé“
+	COG = 0.7;//éšæœºRGBé¢œè‰²é€šé“
+	COB = 0;//éšæœºRGBé¢œè‰²é€šé“
+	for (int i = 1; i < 20; i++) {
+		t = (rand() % 2) + 5;
+		S1 = (double)(rand() % 6280) / 6280.0;
+		S2 = ((double)(rand() % 2355) / 2355) + 0.3925;
+		fprintf(file1, "execute if score @p Timer matches %d run particleex tickpolarparameter minecraft:end_rod %.10f %.10f %.10f %.10f %.10f %.10f 1 0 0 0 0 %d \"s1,s2,dis=%.5f,%.5f-(t/10),t\" 0.1 2 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 30\" 0.5\n", x_3, ex + 0.5, ey + 0.5, ez + 0.5, COR, COG, COB, t, S1, S2);
+	}
+}
+
 ///"s1,dis=t,2*abs(sin(2*t))+abs(sin(4*t))"
 ///particleex polarparameter minecraft:end_rod 0 10 0 1 0.8 0 1 0 0 0 0 6.28 "s1,dis=t,2-2^(sin(5*t))" 0.01 10
 ///particleex rgbatickpolarparameter minecraft:end_rod 0 10 0 0 0 0 0 6.28 "s1,dis,s2,cr,cg,cb=t,5*sin(4*t),0.5,0.75+0.25*sin(t),0.2+0.1*cos(t),0.2+0.2*cos(t)" 0.01 20 25
@@ -387,7 +412,7 @@ void Eight_flower_small_flower_star(long double ex, long double ey, long double 
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
-//-------------------------------------------------------------------------------»æÖÆÏßÌõ²¿·Ö-----------------------------------------------------------------------------------------\\
+//-------------------------------------------------------------------------------ç»˜åˆ¶çº¿æ¡éƒ¨åˆ†-----------------------------------------------------------------------------------------\\
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
 
@@ -397,8 +422,8 @@ void Eight_flower_small_flower_star(long double ex, long double ey, long double 
 int Startype = 0;
 
 void Star_line(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	long double S = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//ÇóÎ»ÒÆ
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	long double S = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//æ±‚ä½ç§»
 	long double theta = atan((z2 - z1) / deltaT);
 	long double H = (S/6) ;
 	long double A = S * 2.0 * sqrt(2.0) / 71.0;
@@ -415,18 +440,18 @@ void Star_line(long double x1, long double x2, long double y1, long double y2, l
 }
 
 
-//»æÖÆÖ±Ïß
+//ç»˜åˆ¶ç›´çº¿
 void straight_line(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	int deltaT2 = (int)abs(x2 - x1);//×ª»»ÎªÕûĞÎ
-	long double S = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//ÇóÎ»ÒÆ
-	long double vz = ((z2 - z1) / deltaT);//²ÎÊı·½³Ì£¨ZÖá£©
-	long double vx = ((x2 - x1) / deltaT);//²ÎÊı·½³Ì£¨XÎª²ÎÊı£©
-	long double vy = ((y2 - y1) / deltaT);//²ÎÊı·½³Ì£¨YÖá£©
-	int x = (int)x1;//ÆğÊ¼Ê±¼ä
-	int x_2 = (int)x2;//ÖÕÖ¹Ê±¼ä
-	long double NumBC = (long double)((int)(S / deltaT))*10.0; //Ã¿Ò»¿Ì¼ÆËãµÄ´ÎÊı
-	long double NumBC_ = 1.0000000 / NumBC;//Ã¿´Î¼ÆËãµÄ²ÎÊıµİÔöÁ¿
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	int deltaT2 = (int)abs(x2 - x1);//è½¬æ¢ä¸ºæ•´å½¢
+	long double S = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//æ±‚ä½ç§»
+	long double vz = ((z2 - z1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆZè½´ï¼‰
+	long double vx = ((x2 - x1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆXä¸ºå‚æ•°ï¼‰
+	long double vy = ((y2 - y1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆYè½´ï¼‰
+	int x = (int)x1;//èµ·å§‹æ—¶é—´
+	int x_2 = (int)x2;//ç»ˆæ­¢æ—¶é—´
+	long double NumBC = (long double)((int)(S / deltaT))*10.0; //æ¯ä¸€åˆ»è®¡ç®—çš„æ¬¡æ•°
+	long double NumBC_ = 1.0000000 / NumBC;//æ¯æ¬¡è®¡ç®—çš„å‚æ•°é€’å¢é‡
 	
 
 
@@ -434,10 +459,10 @@ void straight_line(long double x1, long double x2, long double y1, long double y
 }
 
 
-//µÑ¿¨¶ùÒ¶ĞÎÏß
+//ç¬›å¡å„¿å¶å½¢çº¿
 void Folium_of_Descartes(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	long double S = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//ÇóÎ»ÒÆ
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	long double S = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//æ±‚ä½ç§»
 	long double theta = atan((z2 - z1) / deltaT);
 	long double H = S / 71.0;
 	long double A = S * 2.0 * sqrt(2.0) / 71.0;
@@ -447,8 +472,8 @@ void Folium_of_Descartes(long double x1, long double x2, long double y1, long do
 }
 
 void Folium_of_Descartes_W(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	long double S = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//ÇóÎ»ÒÆ
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	long double S = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//æ±‚ä½ç§»
 	long double theta = atan((z2 - z1) / deltaT);
 	long double H = S / 71.0;
 	long double A = S * 2.0 * sqrt(2.0) / 71.0;
@@ -458,52 +483,52 @@ void Folium_of_Descartes_W(long double x1, long double x2, long double y1, long 
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickpolarparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 -0.7287 2.2997 \"s1,s2,dis,cr,cg,cb=%.10f,t+PI/4,(3*%.10f*sin(t)*cos(t))/(sin(t)*sin(t)*sin(t)+cos(t)*cos(t)*cos(t)),sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" 0.0016 %d 20\n", int(x1), (x1 + x2) / 2.0 + 0.5, y1 + H + 0.5, (z2 + z1) / 2.0 + 0.5, theta, A, N);
 }
 
-//ÕıÏÒÇúÏß
+//æ­£å¼¦æ›²çº¿
 void sin_straight_line(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	int deltaT2 = (int)abs(x2 - x1);//×ª»»ÎªÕûĞÎ
-	long double S = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//ÇóÎ»ÒÆ
-	long double vz = ((z2 - z1) / deltaT);//²ÎÊı·½³Ì£¨ZÖá£©
-	long double vx = ((x2 - x1) / deltaT);//²ÎÊı·½³Ì£¨XÎª²ÎÊı£©
-	long double vy = ((y2 - y1) / deltaT);//²ÎÊı·½³Ì£¨YÖá£©
-	int x = (int)x1;//ÆğÊ¼Ê±¼ä
-	int x_2 = (int)x2;//ÖÕÖ¹Ê±¼ä
-	long double NumBC = (long double)((int)(S / deltaT)) * 15.0; //Ã¿Ò»¿Ì¼ÆËãµÄ´ÎÊı
-	long double NumBC_ = 1.0000000 / NumBC;//Ã¿´Î¼ÆËãµÄ²ÎÊıµİÔöÁ¿
-	long double Sin_A_;//ÕıÏÒÇúÏßµÄÕñ·ù
-	Sin_A_ = S / 10;//¼ÆËãÕñ·ù
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	int deltaT2 = (int)abs(x2 - x1);//è½¬æ¢ä¸ºæ•´å½¢
+	long double S = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//æ±‚ä½ç§»
+	long double vz = ((z2 - z1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆZè½´ï¼‰
+	long double vx = ((x2 - x1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆXä¸ºå‚æ•°ï¼‰
+	long double vy = ((y2 - y1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆYè½´ï¼‰
+	int x = (int)x1;//èµ·å§‹æ—¶é—´
+	int x_2 = (int)x2;//ç»ˆæ­¢æ—¶é—´
+	long double NumBC = (long double)((int)(S / deltaT)) * 15.0; //æ¯ä¸€åˆ»è®¡ç®—çš„æ¬¡æ•°
+	long double NumBC_ = 1.0000000 / NumBC;//æ¯æ¬¡è®¡ç®—çš„å‚æ•°é€’å¢é‡
+	long double Sin_A_;//æ­£å¼¦æ›²çº¿çš„æŒ¯å¹…
+	Sin_A_ = S / 10;//è®¡ç®—æŒ¯å¹…
 	
 
 
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = t+0.5,%.10f*sin(t/%.10f)+%.10f*t+0.5, %.10f*t+0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25\n", x, x1, y1, z1, deltaT2, Sin_A_, deltaT/(6*pi), vy, vz, NumBC_, (int)NumBC);
 }
 
-//»æÖÆÅ×ÎïÏß
+//ç»˜åˆ¶æŠ›ç‰©çº¿
 void parabola_line(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	int deltaT2 = (int)abs(x2 - x1);//×ª»»ÎªÕûĞÎ
-	long double vz = ((z2 - z1) / deltaT);//²ÎÊı·½³Ì£¨ZÖá£©
-	long double vx = ((x2 - x1) / deltaT);//²ÎÊı·½³Ì£¨XÎª²ÎÊı£©
-	long double s = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//ÇóÎ»ÒÆ
-	int x = (int)x1;//ÆğÊ¼Ê±¼ä
-	int x_2 = (int)x2;//ÖÕÖ¹Ê±¼ä
-	long double NumBC = (long double)((int)(s / deltaT))*20.0; //Ã¿Ò»¿Ì¼ÆËãµÄ´ÎÊı
-	long double NumBC_ = 1.0000000 / NumBC;//Ã¿´Î¼ÆËãµÄ²ÎÊıµİÔöÁ¿
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	int deltaT2 = (int)abs(x2 - x1);//è½¬æ¢ä¸ºæ•´å½¢
+	long double vz = ((z2 - z1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆZè½´ï¼‰
+	long double vx = ((x2 - x1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆXä¸ºå‚æ•°ï¼‰
+	long double s = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//æ±‚ä½ç§»
+	int x = (int)x1;//èµ·å§‹æ—¶é—´
+	int x_2 = (int)x2;//ç»ˆæ­¢æ—¶é—´
+	long double NumBC = (long double)((int)(s / deltaT))*20.0; //æ¯ä¸€åˆ»è®¡ç®—çš„æ¬¡æ•°
+	long double NumBC_ = 1.0000000 / NumBC;//æ¯æ¬¡è®¡ç®—çš„å‚æ•°é€’å¢é‡
 	
 
 	if (abs(z2 - z1) >= deltaT) {
 		Lamta = (long double)((int)(5 * (abs(z2 - z1) / deltaT)));
 	}
-	double H;//Å×ÎïÏß×î¸ßµã
-	double deltaY = y2 - y1;//YÖáÏà¶Ô×ø±ê
-	double deltaX = x2 - x1;//XÖáÏà¶Ô×ø±ê
+	double H;//æŠ›ç‰©çº¿æœ€é«˜ç‚¹
+	double deltaY = y2 - y1;//Yè½´ç›¸å¯¹åæ ‡
+	double deltaX = x2 - x1;//Xè½´ç›¸å¯¹åæ ‡
 
 	if (y2 > y1) {
-		H = 0.2 * s + deltaY;//¸ß¶ÈµÄ¶¨Òå
+		H = 0.2 * s + deltaY;//é«˜åº¦çš„å®šä¹‰
 	}
 	else {
-		H = 0.2 * s;//¸ß¶ÈµÄ¶¨Òå
+		H = 0.2 * s;//é«˜åº¦çš„å®šä¹‰
 	}
 
 	double a;//y=bx(x-a)
@@ -518,30 +543,30 @@ void parabola_line(long double x1, long double x2, long double y1, long double y
 	else if (deltaY == 0) {
 		a = deltaX;
 		b = (-4 * H) / (a * a);
-	}//ÇóyÖá²ÎÊı·½³Ì
+	}//æ±‚yè½´å‚æ•°æ–¹ç¨‹
 	
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = t+0.5, (%.10f*t*(t-%.10f))+0.5, %.10f*t+0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25\n", x, x1, y1, z1, deltaT2, b, a, vz, NumBC_, (int)NumBC);
 }
 
-//ÂİÏß
+//èºçº¿
 void spiral_line(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
-	//ÇóÆ½¾ùËÙ¶È£¨Ö±ÏßÒÆ¶¯ËÙ¶È£©
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	int deltaT2 = (int)abs(x2 - x1);//×ª»»ÎªÕûĞÎ
-	long double vz = ((z2 - z1) / deltaT);//²ÎÊı·½³Ì£¨ZÖá£©
-	long double vx = ((x2 - x1) / deltaT);//²ÎÊı·½³Ì£¨XÎª²ÎÊı£©
-	long double vy = ((y2 - y1) / deltaT);//²ÎÊı·½³Ì£¨YÖá£©
-	long double s = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));//Â·³Ì
-	long double h = y2 - y1;//¸ß¶È
-	long double theta = atan((x2 - x1) / (z2 - z1));//Ë®Æ½Æ«×ª½Ç
-	long double phi = atan(h / s);//ÊúÖ±Æ«×ª½Ç
-	long double omega = 2 * deltaT * pi / (Lamta * deltaT);//×ªËÙ
+	//æ±‚å¹³å‡é€Ÿåº¦ï¼ˆç›´çº¿ç§»åŠ¨é€Ÿåº¦ï¼‰
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	int deltaT2 = (int)abs(x2 - x1);//è½¬æ¢ä¸ºæ•´å½¢
+	long double vz = ((z2 - z1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆZè½´ï¼‰
+	long double vx = ((x2 - x1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆXä¸ºå‚æ•°ï¼‰
+	long double vy = ((y2 - y1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆYè½´ï¼‰
+	long double s = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));//è·¯ç¨‹
+	long double h = y2 - y1;//é«˜åº¦
+	long double theta = atan((x2 - x1) / (z2 - z1));//æ°´å¹³åè½¬è§’
+	long double phi = atan(h / s);//ç«–ç›´åè½¬è§’
+	long double omega = 2 * deltaT * pi / (Lamta * deltaT);//è½¬é€Ÿ
 	long double AAA = s / 6;
-	long double omega2 = pi / (Lamta * deltaT);//×ªËÙ
-	int x_1 = (int)x1;//ÆğÊ¼Ê±¼ä
-	int x_2 = (int)x2;//ÖÕÖ¹Ê±¼ä
-	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //Ã¿Ò»¿Ì¼ÆËãµÄ´ÎÊı
-	long double NumBC_ = 1.0000000 / NumBC;//Ã¿´Î¼ÆËãµÄ²ÎÊıµİÔöÁ¿
+	long double omega2 = pi / (Lamta * deltaT);//è½¬é€Ÿ
+	int x_1 = (int)x1;//èµ·å§‹æ—¶é—´
+	int x_2 = (int)x2;//ç»ˆæ­¢æ—¶é—´
+	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //æ¯ä¸€åˆ»è®¡ç®—çš„æ¬¡æ•°
+	long double NumBC_ = 1.0000000 / NumBC;//æ¯æ¬¡è®¡ç®—çš„å‚æ•°é€’å¢é‡
 	long double r_r = 3;
 	if (s > 40) {
 		r_r = s / 8.0;
@@ -553,26 +578,26 @@ void spiral_line(long double x1, long double x2, long double y1, long double y2,
 		
 }
 
-//ÂİÏß(´øÖ±Ïß£©
+//èºçº¿(å¸¦ç›´çº¿ï¼‰
 void spiral_line_straight(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
-	//ÇóÆ½¾ùËÙ¶È£¨Ö±ÏßÒÆ¶¯ËÙ¶È£©
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	int deltaT2 = (int)abs(x2 - x1);//×ª»»ÎªÕûĞÎ
-	long double vz = ((z2 - z1) / deltaT);//²ÎÊı·½³Ì£¨ZÖá£©
-	long double vx = ((x2 - x1) / deltaT);//²ÎÊı·½³Ì£¨XÎª²ÎÊı£©
-	long double vy = ((y2 - y1) / deltaT);//²ÎÊı·½³Ì£¨YÖá£©
-	long double s = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));//Â·³Ì
-	long double h = y2 - y1;//¸ß¶È
-	long double theta = atan((x2 - x1) / (z2 - z1));//Ë®Æ½Æ«×ª½Ç
-	long double phi = atan(h / s);//ÊúÖ±Æ«×ª½Ç
-	long double omega = 2 * deltaT * pi / (Lamta * deltaT);//×ªËÙ
+	//æ±‚å¹³å‡é€Ÿåº¦ï¼ˆç›´çº¿ç§»åŠ¨é€Ÿåº¦ï¼‰
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	int deltaT2 = (int)abs(x2 - x1);//è½¬æ¢ä¸ºæ•´å½¢
+	long double vz = ((z2 - z1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆZè½´ï¼‰
+	long double vx = ((x2 - x1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆXä¸ºå‚æ•°ï¼‰
+	long double vy = ((y2 - y1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆYè½´ï¼‰
+	long double s = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));//è·¯ç¨‹
+	long double h = y2 - y1;//é«˜åº¦
+	long double theta = atan((x2 - x1) / (z2 - z1));//æ°´å¹³åè½¬è§’
+	long double phi = atan(h / s);//ç«–ç›´åè½¬è§’
+	long double omega = 2 * deltaT * pi / (Lamta * deltaT);//è½¬é€Ÿ
 	long double AAA = s / 6;
-	long double omega2 = pi / (Lamta * deltaT);//×ªËÙ
-	int x_1 = (int)x1;//ÆğÊ¼Ê±¼ä
-	int x = (int)x1;//ÆğÊ¼Ê±¼ä
-	int x_2 = (int)x2;//ÖÕÖ¹Ê±¼ä
-	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //Ã¿Ò»¿Ì¼ÆËãµÄ´ÎÊı
-	long double NumBC_ = 1.0000000 / NumBC;//Ã¿´Î¼ÆËãµÄ²ÎÊıµİÔöÁ¿
+	long double omega2 = pi / (Lamta * deltaT);//è½¬é€Ÿ
+	int x_1 = (int)x1;//èµ·å§‹æ—¶é—´
+	int x = (int)x1;//èµ·å§‹æ—¶é—´
+	int x_2 = (int)x2;//ç»ˆæ­¢æ—¶é—´
+	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //æ¯ä¸€åˆ»è®¡ç®—çš„æ¬¡æ•°
+	long double NumBC_ = 1.0000000 / NumBC;//æ¯æ¬¡è®¡ç®—çš„å‚æ•°é€’å¢é‡
 	long double r_r = 3;
 	if (s > 40) {
 		r_r = s / 8.0;
@@ -581,86 +606,86 @@ void spiral_line_straight(long double x1, long double x2, long double y1, long d
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = t+0.5, %.10f*t+0.5, %.10f*t+0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25\n", x, x1, y1, z1, deltaT2, vy, vz, NumBC_, (int)NumBC);
 }
 
-//ÂİÏß×é
+//èºçº¿ç»„
 void spiral_lines(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
-	//ÇóÆ½¾ùËÙ¶È£¨Ö±ÏßÒÆ¶¯ËÙ¶È£©
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	int deltaT2 = (int)abs(x2 - x1);//×ª»»ÎªÕûĞÎ
-	long double vz = ((z2 - z1) / deltaT);//²ÎÊı·½³Ì£¨ZÖá£©
-	long double vx = ((x2 - x1) / deltaT);//²ÎÊı·½³Ì£¨XÎª²ÎÊı£©
-	long double vy = ((y2 - y1) / deltaT);//²ÎÊı·½³Ì£¨YÖá£©
-	long double s = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));//Â·³Ì
-	long double h = y2 - y1;//¸ß¶È
-	long double theta = atan((x2 - x1) / (z2 - z1));//Ë®Æ½Æ«×ª½Ç
-	long double phi = atan(h / s);//ÊúÖ±Æ«×ª½Ç
-	long double omega = 4*deltaT * pi / (Lamta * s);//×ªËÙ
+	//æ±‚å¹³å‡é€Ÿåº¦ï¼ˆç›´çº¿ç§»åŠ¨é€Ÿåº¦ï¼‰
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	int deltaT2 = (int)abs(x2 - x1);//è½¬æ¢ä¸ºæ•´å½¢
+	long double vz = ((z2 - z1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆZè½´ï¼‰
+	long double vx = ((x2 - x1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆXä¸ºå‚æ•°ï¼‰
+	long double vy = ((y2 - y1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆYè½´ï¼‰
+	long double s = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));//è·¯ç¨‹
+	long double h = y2 - y1;//é«˜åº¦
+	long double theta = atan((x2 - x1) / (z2 - z1));//æ°´å¹³åè½¬è§’
+	long double phi = atan(h / s);//ç«–ç›´åè½¬è§’
+	long double omega = 4*deltaT * pi / (Lamta * s);//è½¬é€Ÿ
 	long double AAA = s / 6;
-	long double omega2 = pi / (Lamta * s);//×ªËÙ
-	int x_1 = (int)x1;//ÆğÊ¼Ê±¼ä
-	int x_2 = (int)x2;//ÖÕÖ¹Ê±¼ä
-	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //Ã¿Ò»¿Ì¼ÆËãµÄ´ÎÊı
-	long double NumBC_ = 1.0000000 / NumBC;//Ã¿´Î¼ÆËãµÄ²ÎÊıµİÔöÁ¿
+	long double omega2 = pi / (Lamta * s);//è½¬é€Ÿ
+	int x_1 = (int)x1;//èµ·å§‹æ—¶é—´
+	int x_2 = (int)x2;//ç»ˆæ­¢æ—¶é—´
+	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //æ¯ä¸€åˆ»è®¡ç®—çš„æ¬¡æ•°
+	long double NumBC_ = 1.0000000 / NumBC;//æ¯æ¬¡è®¡ç®—çš„å‚æ•°é€’å¢é‡
 	long double r_r = 4;
-	//ÂİÏß×î´ó°ë¾¶
+	//èºçº¿æœ€å¤§åŠå¾„
 
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = 0+(%.10f * t - (%.10f*sin(t*%.10f)^2 * ((cos(%.10f) * cos(%.10f * t)) + (sin(%.10f) * sin(%.10f) * sin(%.10f * t)))) + 0.5), %.10f * t + (%.10f*sin(t*%.10f) * (cos(%.10f) * sin(%.10f * t))) + 0.5, %.10f * t + (%.10f*sin(t*%.10f)^2 * ((sin(%.10f) * cos(%.10f * t)) - (cos(%.10f) * sin(%.10f) * sin(%.10f * t)))) + 0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25\n", x_1, x1, y1, z1, deltaT2, vx, r_r, pi / deltaT, theta, omega, theta, phi, omega, vy, r_r, pi / deltaT, phi, omega, vz, r_r, pi / deltaT, theta, omega, theta, phi, omega, NumBC_, (int)NumBC);
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = 0+(%.10f * t - (%.10f*sin(t*%.10f)^2 * ((cos(%.10f) * cos(%.10f * t + (3.1415926535))) + (sin(%.10f) * sin(%.10f) * sin(%.10f * t+ (3.1415926535))))) + 0.5), %.10f * t + (%.10f*sin(t*%.10f)^2 * (cos(%.10f) * sin(%.10f * t+ (3.1415926535)))) + 0.5, %.10f * t + (%.10f*sin(t*%.10f)^2 * ((sin(%.10f) * cos(%.10f * t+ (3.1415926535))) - (cos(%.10f) * sin(%.10f) * sin(%.10f * t+ (3.1415926535))))) + 0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25\n", x_1, x1, y1, z1, deltaT2, vx, r_r, pi / deltaT, theta, omega, theta, phi, omega, vy, r_r, pi / deltaT, phi, omega, vz, r_r, pi / deltaT, theta, omega, theta, phi, omega, NumBC_, (int)NumBC);
 
 }
 
-//ÂİÏß×é(´øÖĞĞÄÖ±Ïß£©
+//èºçº¿ç»„(å¸¦ä¸­å¿ƒç›´çº¿ï¼‰
 void spiral_lines_straight_line(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
-	//ÇóÆ½¾ùËÙ¶È£¨Ö±ÏßÒÆ¶¯ËÙ¶È£©
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	int deltaT2 = (int)abs(x2 - x1);//×ª»»ÎªÕûĞÎ
-	long double vz = ((z2 - z1) / deltaT);//²ÎÊı·½³Ì£¨ZÖá£©
-	long double vx = ((x2 - x1) / deltaT);//²ÎÊı·½³Ì£¨XÎª²ÎÊı£©
-	long double vy = ((y2 - y1) / deltaT);//²ÎÊı·½³Ì£¨YÖá£©
-	long double s = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));//Â·³Ì
-	long double h = y2 - y1;//¸ß¶È
-	long double theta = atan((x2 - x1) / (z2 - z1));//Ë®Æ½Æ«×ª½Ç
-	long double phi = atan(h / s);//ÊúÖ±Æ«×ª½Ç
-	long double omega = 4 * deltaT * pi / (Lamta * deltaT);//×ªËÙ
+	//æ±‚å¹³å‡é€Ÿåº¦ï¼ˆç›´çº¿ç§»åŠ¨é€Ÿåº¦ï¼‰
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	int deltaT2 = (int)abs(x2 - x1);//è½¬æ¢ä¸ºæ•´å½¢
+	long double vz = ((z2 - z1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆZè½´ï¼‰
+	long double vx = ((x2 - x1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆXä¸ºå‚æ•°ï¼‰
+	long double vy = ((y2 - y1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆYè½´ï¼‰
+	long double s = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));//è·¯ç¨‹
+	long double h = y2 - y1;//é«˜åº¦
+	long double theta = atan((x2 - x1) / (z2 - z1));//æ°´å¹³åè½¬è§’
+	long double phi = atan(h / s);//ç«–ç›´åè½¬è§’
+	long double omega = 4 * deltaT * pi / (Lamta * deltaT);//è½¬é€Ÿ
 	long double AAA = s / 6;
-	long double omega2 = pi / (Lamta * deltaT);//×ªËÙ
-	int x_1 = (int)x1;//ÆğÊ¼Ê±¼ä
-	int x_2 = (int)x2;//ÖÕÖ¹Ê±¼ä
-	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //Ã¿Ò»¿Ì¼ÆËãµÄ´ÎÊı
-	long double NumBC_ = 1.0000000 / NumBC;//Ã¿´Î¼ÆËãµÄ²ÎÊıµİÔöÁ¿
+	long double omega2 = pi / (Lamta * deltaT);//è½¬é€Ÿ
+	int x_1 = (int)x1;//èµ·å§‹æ—¶é—´
+	int x_2 = (int)x2;//ç»ˆæ­¢æ—¶é—´
+	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //æ¯ä¸€åˆ»è®¡ç®—çš„æ¬¡æ•°
+	long double NumBC_ = 1.0000000 / NumBC;//æ¯æ¬¡è®¡ç®—çš„å‚æ•°é€’å¢é‡
 	long double r_r = 3;
 	if (s > 40) {
 		r_r = s / 8.0;
-	}//ÂİÏß×î´ó°ë¾¶
+	}//èºçº¿æœ€å¤§åŠå¾„
 	if (r_r > 5) {
 		r_r = 5;
 	}
-	int x = (int)x1;//ÆğÊ¼Ê±¼ä
+	int x = (int)x1;//èµ·å§‹æ—¶é—´
 
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = 0+(%.10f * t - (%.10f*sin(t*%.10f)^2 * ((cos(%.10f) * cos(%.10f * t)) + (sin(%.10f) * sin(%.10f) * sin(%.10f * t)))) + 0.5), %.10f * t + (%.10f*sin(t*%.10f) * (cos(%.10f) * sin(%.10f * t))) + 0.5, %.10f * t + (%.10f*sin(t*%.10f)^2 * ((sin(%.10f) * cos(%.10f * t)) - (cos(%.10f) * sin(%.10f) * sin(%.10f * t)))) + 0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25\n", x_1, x1, y1, z1, deltaT2, vx, r_r, pi / deltaT, theta, omega, theta, phi, omega, vy, r_r, pi / deltaT, phi, omega, vz, r_r, pi / deltaT, theta, omega, theta, phi, omega, NumBC_, (int)NumBC);
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = 0+(%.10f * t - (%.10f*sin(t*%.10f)^2 * ((cos(%.10f) * cos(%.10f * t + (3.1415926535))) + (sin(%.10f) * sin(%.10f) * sin(%.10f * t+ (3.1415926535))))) + 0.5), %.10f * t + (%.10f*sin(t*%.10f)^2 * (cos(%.10f) * sin(%.10f * t+ (3.1415926535)))) + 0.5, %.10f * t + (%.10f*sin(t*%.10f)^2 * ((sin(%.10f) * cos(%.10f * t+ (3.1415926535))) - (cos(%.10f) * sin(%.10f) * sin(%.10f * t+ (3.1415926535))))) + 0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25\n", x_1, x1, y1, z1, deltaT2, vx, r_r, pi / deltaT, theta, omega, theta, phi, omega, vy, r_r, pi / deltaT, phi, omega, vz, r_r, pi / deltaT, theta, omega, theta, phi, omega, NumBC_, (int)NumBC);
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = t+0.5, %.10f*t+0.5, %.10f*t+0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25\n", x, x1, y1, z1, deltaT2, vy, vz, NumBC_, (int)NumBC);
 }
 
-//Å×ÎïÏß£¨ÏÂ·½Ïò£©
+//æŠ›ç‰©çº¿ï¼ˆä¸‹æ–¹å‘ï¼‰
 void parabola_line_r(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	int deltaT2 = (int)abs(x2 - x1);//×ª»»ÎªÕûĞÎ
-	long double vz = ((z2 - z1) / deltaT);//²ÎÊı·½³Ì£¨ZÖá£©
-	long double vx = ((x2 - x1) / deltaT);//²ÎÊı·½³Ì£¨XÎª²ÎÊı£©
-	long double s = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//ÇóÎ»ÒÆ
-	int x = (int)x1;//ÆğÊ¼Ê±¼ä
-	int x_2 = (int)x2;//ÖÕÖ¹Ê±¼ä
-	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //Ã¿Ò»¿Ì¼ÆËãµÄ´ÎÊı
-	long double NumBC_ = 1.0000000 / NumBC;//Ã¿´Î¼ÆËãµÄ²ÎÊıµİÔöÁ¿
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	int deltaT2 = (int)abs(x2 - x1);//è½¬æ¢ä¸ºæ•´å½¢
+	long double vz = ((z2 - z1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆZè½´ï¼‰
+	long double vx = ((x2 - x1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆXä¸ºå‚æ•°ï¼‰
+	long double s = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//æ±‚ä½ç§»
+	int x = (int)x1;//èµ·å§‹æ—¶é—´
+	int x_2 = (int)x2;//ç»ˆæ­¢æ—¶é—´
+	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //æ¯ä¸€åˆ»è®¡ç®—çš„æ¬¡æ•°
+	long double NumBC_ = 1.0000000 / NumBC;//æ¯æ¬¡è®¡ç®—çš„å‚æ•°é€’å¢é‡
 
 
 	if (abs(z2 - z1) >= deltaT) {
 		Lamta = (long double)((int)(5 * (abs(z2 - z1) / deltaT)));
 	}
-	double H;//Å×ÎïÏß×î¸ßµã
-	double deltaY = y2 - y1;//YÖáÏà¶Ô×ø±ê
-	double deltaX = x2 - x1;//XÖáÏà¶Ô×ø±ê
+	double H;//æŠ›ç‰©çº¿æœ€é«˜ç‚¹
+	double deltaY = y2 - y1;//Yè½´ç›¸å¯¹åæ ‡
+	double deltaX = x2 - x1;//Xè½´ç›¸å¯¹åæ ‡
 
 	if (y2 < y1) {
 		H = -0.2 * s + deltaY;
@@ -681,38 +706,38 @@ void parabola_line_r(long double x1, long double x2, long double y1, long double
 	else if (deltaY == 0) {
 		a = deltaX;
 		b = (-4 * H) / (a * a);
-	}//ÇóyÖá²ÎÊı·½³Ì
+	}//æ±‚yè½´å‚æ•°æ–¹ç¨‹
 
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = t+0.5, (%.10f*t*(t-%.10f))+0.5, %.10f*t+0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25\n", x, x1, y1, z1, deltaT2, b, a, vz, NumBC_, (int)NumBC);
 
 }
 
-//£¨ÓĞÂİĞıÈ¦Õó£©µÄÅ×ÎïÏß
+//ï¼ˆæœ‰èºæ—‹åœˆé˜µï¼‰çš„æŠ›ç‰©çº¿
 void spiral_round_parabola_line(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	int deltaT2 = (int)abs(x2 - x1);//×ª»»ÎªÕûĞÎ
-	long double vz = ((z2 - z1) / deltaT);//²ÎÊı·½³Ì£¨ZÖá£©
-	long double vx = ((x2 - x1) / deltaT);//²ÎÊı·½³Ì£¨XÎª²ÎÊı£©
-	long double s = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//ÇóÎ»ÒÆ
-	int x = (int)x1;//ÆğÊ¼Ê±¼ä
-	int x_2 = (int)x2;//ÖÕÖ¹Ê±¼ä
-	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //Ã¿Ò»¿Ì¼ÆËãµÄ´ÎÊı
-	long double NumBC_ = 1.0000000 / NumBC;//Ã¿´Î¼ÆËãµÄ²ÎÊıµİÔöÁ¿
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	int deltaT2 = (int)abs(x2 - x1);//è½¬æ¢ä¸ºæ•´å½¢
+	long double vz = ((z2 - z1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆZè½´ï¼‰
+	long double vx = ((x2 - x1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆXä¸ºå‚æ•°ï¼‰
+	long double s = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//æ±‚ä½ç§»
+	int x = (int)x1;//èµ·å§‹æ—¶é—´
+	int x_2 = (int)x2;//ç»ˆæ­¢æ—¶é—´
+	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //æ¯ä¸€åˆ»è®¡ç®—çš„æ¬¡æ•°
+	long double NumBC_ = 1.0000000 / NumBC;//æ¯æ¬¡è®¡ç®—çš„å‚æ•°é€’å¢é‡
 
 
 	if (abs(z2 - z1) >= deltaT) {
 		Lamta = (long double)((int)(5 * (abs(z2 - z1) / deltaT)));
 	}
-	double H;//Å×ÎïÏß×î¸ßµã
-	double deltaY = y2 - y1;//YÖáÏà¶Ô×ø±ê
-	double deltaX = x2 - x1;//XÖáÏà¶Ô×ø±ê
+	double H;//æŠ›ç‰©çº¿æœ€é«˜ç‚¹
+	double deltaY = y2 - y1;//Yè½´ç›¸å¯¹åæ ‡
+	double deltaX = x2 - x1;//Xè½´ç›¸å¯¹åæ ‡
 
 	if (y2 > y1) {
-		H = 0.2 * s + deltaY;//¸ß¶ÈµÄ¶¨Òå
+		H = 0.2 * s + deltaY;//é«˜åº¦çš„å®šä¹‰
 	}
 	else {
-		H = 0.2 * s;//¸ß¶ÈµÄ¶¨Òå
+		H = 0.2 * s;//é«˜åº¦çš„å®šä¹‰
 	}
 
 	double a;//y=bx(x-a)
@@ -727,32 +752,32 @@ void spiral_round_parabola_line(long double x1, long double x2, long double y1, 
 	else if (deltaY == 0) {
 		a = deltaX;
 		b = (-4 * H) / (a * a);
-	}//ÇóyÖá²ÎÊı·½³Ì
+	}//æ±‚yè½´å‚æ•°æ–¹ç¨‹
 
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = t+0.5, (%.10f*t*(t-%.10f))+0.5, %.10f*t+0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25\n", x, x1, y1, z1, deltaT2, b, a, vz, NumBC_, (int)NumBC);
 	print_round_move(x2, y2, z2);
 }
 
-//£¨ÓĞÂİĞıÈ¦Õó£©µÄÅ×ÎïÏß£¨·´Ïò£©
+//ï¼ˆæœ‰èºæ—‹åœˆé˜µï¼‰çš„æŠ›ç‰©çº¿ï¼ˆåå‘ï¼‰
 void spiral_round_parabola_line_r(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	int deltaT2 = (int)abs(x2 - x1);//×ª»»ÎªÕûĞÎ
-	long double vz = ((z2 - z1) / deltaT);//²ÎÊı·½³Ì£¨ZÖá£©
-	long double vx = ((x2 - x1) / deltaT);//²ÎÊı·½³Ì£¨XÎª²ÎÊı£©
-	long double s = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//ÇóÎ»ÒÆ
-	int x = (int)x1;//ÆğÊ¼Ê±¼ä
-	int x_2 = (int)x2;//ÖÕÖ¹Ê±¼ä
-	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //Ã¿Ò»¿Ì¼ÆËãµÄ´ÎÊı
-	long double NumBC_ = 1.0000000 / NumBC;//Ã¿´Î¼ÆËãµÄ²ÎÊıµİÔöÁ¿
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	int deltaT2 = (int)abs(x2 - x1);//è½¬æ¢ä¸ºæ•´å½¢
+	long double vz = ((z2 - z1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆZè½´ï¼‰
+	long double vx = ((x2 - x1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆXä¸ºå‚æ•°ï¼‰
+	long double s = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//æ±‚ä½ç§»
+	int x = (int)x1;//èµ·å§‹æ—¶é—´
+	int x_2 = (int)x2;//ç»ˆæ­¢æ—¶é—´
+	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //æ¯ä¸€åˆ»è®¡ç®—çš„æ¬¡æ•°
+	long double NumBC_ = 1.0000000 / NumBC;//æ¯æ¬¡è®¡ç®—çš„å‚æ•°é€’å¢é‡
 
 
 	if (abs(z2 - z1) >= deltaT) {
 		Lamta = (long double)((int)(5 * (abs(z2 - z1) / deltaT)));
 	}
-	double H;//Å×ÎïÏß×î¸ßµã
-	double deltaY = y2 - y1;//YÖáÏà¶Ô×ø±ê
-	double deltaX = x2 - x1;//XÖáÏà¶Ô×ø±ê
+	double H;//æŠ›ç‰©çº¿æœ€é«˜ç‚¹
+	double deltaY = y2 - y1;//Yè½´ç›¸å¯¹åæ ‡
+	double deltaX = x2 - x1;//Xè½´ç›¸å¯¹åæ ‡
 
 	if (y2 < y1) {
 		H = -0.2 * s + deltaY;
@@ -773,7 +798,7 @@ void spiral_round_parabola_line_r(long double x1, long double x2, long double y1
 	else if (deltaY == 0) {
 		a = deltaX;
 		b = (-4 * H) / (a * a);
-	}//ÇóyÖá²ÎÊı·½³Ì
+	}//æ±‚yè½´å‚æ•°æ–¹ç¨‹
 
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = t+0.5, (%.10f*t*(t-%.10f))+0.5, %.10f*t+0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25\n", x, x1, y1, z1, deltaT2, b, a, vz, NumBC_, (int)NumBC);
 	print_round_move(x2, y2, z2);
@@ -781,7 +806,7 @@ void spiral_round_parabola_line_r(long double x1, long double x2, long double y1
 
 void round_parabola_line(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD);
 
-//Á¬ĞøÏàÇĞÔ²ÇúÏß
+//è¿ç»­ç›¸åˆ‡åœ†æ›²çº¿
 
 Point Later_Center;
 void Round_line(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD)
@@ -858,18 +883,18 @@ void Round_line(long double x1, long double x2, long double y1, long double y2, 
 				}
 			}
 			printf(
-				"ÉÏÒ»´ÎÔ²ĞÄ£º%Lf %Lf\n"
-				"Ô²ĞÄ£º%Lf %Lf\n"
-				"R=%Lf\nÄ£Ê½£º%d\n",
+				"ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š%Lf %Lf\n"
+				"åœ†å¿ƒï¼š%Lf %Lf\n"
+				"R=%Lf\næ¨¡å¼ï¼š%d\n",
 				Later_Center.z, Later_Center.x,
 				Center.z, Center.x,
 				R, Mode
 			);
 			/*
-			cout << "ÉÏÒ»´ÎÔ²ĞÄ£º" << Later_Center.z << " " << Later_Center.x << endl;
-			cout << "Ô²ĞÄ£º" << Center.z << " " << Center.x << endl;
+			cout << "ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š" << Later_Center.z << " " << Later_Center.x << endl;
+			cout << "åœ†å¿ƒï¼š" << Center.z << " " << Center.x << endl;
 			cout << "R=" << R << endl;
-			cout << "Ä£Ê½£º" << Mode << endl;
+			cout << "æ¨¡å¼ï¼š" << Mode << endl;
 			*/
 			Later_Center = Center;
 		}
@@ -883,14 +908,14 @@ void Round_line(long double x1, long double x2, long double y1, long double y2, 
 	
 
 	long double S = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
-	printf("Á½µã¼ä¾àÀë£º%Lf\n", S);
-	//cout << "Á½µã¼ä¾àÀë£º" << S << endl;
+	printf("ä¸¤ç‚¹é—´è·ç¦»ï¼š%Lf\n", S);
+	//cout << "ä¸¤ç‚¹é—´è·ç¦»ï¼š" << S << endl;
 	long double Theta = acos(S / (2 * R));
-	printf("Theta£º%Lf\n", Theta);
-	//cout << "Theta£º" << Theta << endl;
+	printf("Thetaï¼š%Lf\n", Theta);
+	//cout << "Thetaï¼š" << Theta << endl;
 	long double Phi = pi - (2 * Theta);
-	printf("Phi£º%Lf\n", Phi);
-	//cout << "Phi£º" << Phi << endl;
+	printf("Phiï¼š%Lf\n", Phi);
+	//cout << "Phiï¼š" << Phi << endl;
 	long double TTT = ((Center.x - L1.b) / L1.k);
 	long double Omega = 0.0;
 	if (Mode == 1)
@@ -934,7 +959,7 @@ void Round_line(long double x1, long double x2, long double y1, long double y2, 
 	}
 
 	double XXX = 1 / Lamta;
-	int deltaT2 = (int)x1;//×ª»»ÎªÕûĞÎ
+	int deltaT2 = (int)x1;//è½¬æ¢ä¸ºæ•´å½¢
 	long double vy = (((y2 - y1) / (Lamta*abs(x2-x1))));
 
 	if (Mode == -1) {
@@ -1028,18 +1053,18 @@ void Round_line_1(long double x1, long double x2, long double y1, long double y2
 				}
 			}
 			printf(
-				"ÉÏÒ»´ÎÔ²ĞÄ£º%Lf %Lf\n"
-				"Ô²ĞÄ£º%Lf %Lf\n"
-				"R=%Lf\nÄ£Ê½£º%d\n",
+				"ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š%Lf %Lf\n"
+				"åœ†å¿ƒï¼š%Lf %Lf\n"
+				"R=%Lf\næ¨¡å¼ï¼š%d\n",
 				Later_Center_Truck[0].z, Later_Center_Truck[0].x,
 				Center.z, Center.x,
 				R, Mode_Tr[0]
 			);
 			/*
-			cout << "ÉÏÒ»´ÎÔ²ĞÄ£º" << Later_Center.z << " " << Later_Center.x << endl;
-			cout << "Ô²ĞÄ£º" << Center.z << " " << Center.x << endl;
+			cout << "ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š" << Later_Center.z << " " << Later_Center.x << endl;
+			cout << "åœ†å¿ƒï¼š" << Center.z << " " << Center.x << endl;
 			cout << "R=" << R << endl;
-			cout << "Ä£Ê½£º" << Mode_Tr[0] << endl;
+			cout << "æ¨¡å¼ï¼š" << Mode_Tr[0] << endl;
 			*/
 			Later_Center_Truck[0] = Center;
 			if (R > 200) {
@@ -1050,21 +1075,21 @@ void Round_line_1(long double x1, long double x2, long double y1, long double y2
 	}
 	long double C = 2 * pi * R;
 	long double deltaT = abs(x2 - x1);
-	Lamta = (long double)((int)((C * 5 / deltaT)));
+	Lamta = (long double)((int)((C * 20 / deltaT)));
 	if (Lamta < 40) {
 		Lamta = 40;
 	}
 
 
 	long double S = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
-	printf("Á½µã¼ä¾àÀë£º%Lf\n", S);
-	//cout << "Á½µã¼ä¾àÀë£º" << S << endl;
+	printf("ä¸¤ç‚¹é—´è·ç¦»ï¼š%Lf\n", S);
+	//cout << "ä¸¤ç‚¹é—´è·ç¦»ï¼š" << S << endl;
 	long double Theta = acos(S / (2 * R));
-	printf("Theta£º%Lf\n", Theta);
-	//cout << "Theta£º" << Theta << endl;
+	printf("Thetaï¼š%Lf\n", Theta);
+	//cout << "Thetaï¼š" << Theta << endl;
 	long double Phi = pi - (2 * Theta);
-	printf("Phi£º%Lf\n", Phi);
-	//cout << "Phi£º" << Phi << endl;
+	printf("Phiï¼š%Lf\n", Phi);
+	//cout << "Phiï¼š" << Phi << endl;
 	long double TTT = ((Center.x - L1.b) / L1.k);
 	long double Omega = 0.0;
 	if (Mode_Tr[0] == 1)
@@ -1109,7 +1134,7 @@ void Round_line_1(long double x1, long double x2, long double y1, long double y2
 	long double R_of_Y = (x2-x1) / 2.0;
 	long double omega_of_y = pi / (deltaT * Lamta);
 	double XXX = 1 / deltaT * Lamta;
-	int deltaT2 = (int)x1;//×ª»»ÎªÕûĞÎ
+	int deltaT2 = (int)x1;//è½¬æ¢ä¸ºæ•´å½¢
 	if (Mode_of_Y[0] == -1) {
 		omega_of_y = 0.0-omega_of_y;
 	}
@@ -1194,18 +1219,18 @@ void Round_line_2(long double x1, long double x2, long double y1, long double y2
 				}
 			}
 			printf(
-				"ÉÏÒ»´ÎÔ²ĞÄ£º%Lf %Lf\n"
-				"Ô²ĞÄ£º%Lf %Lf\n"
-				"R=%Lf\nÄ£Ê½£º%d\n",
+				"ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š%Lf %Lf\n"
+				"åœ†å¿ƒï¼š%Lf %Lf\n"
+				"R=%Lf\næ¨¡å¼ï¼š%d\n",
 				Later_Center_Truck[1].z, Later_Center_Truck[1].x,
 				Center.z, Center.x,
 				R, Mode_Tr[1]
 			);
 			/*
-			cout << "ÉÏÒ»´ÎÔ²ĞÄ£º" << Later_Center.z << " " << Later_Center.x << endl;
-			cout << "Ô²ĞÄ£º" << Center.z << " " << Center.x << endl;
+			cout << "ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š" << Later_Center.z << " " << Later_Center.x << endl;
+			cout << "åœ†å¿ƒï¼š" << Center.z << " " << Center.x << endl;
 			cout << "R=" << R << endl;
-			cout << "Ä£Ê½£º" << Mode_Tr[1] << endl;
+			cout << "æ¨¡å¼ï¼š" << Mode_Tr[1] << endl;
 			*/
 			Later_Center_Truck[1] = Center;
 			if (R > 200) {
@@ -1216,21 +1241,21 @@ void Round_line_2(long double x1, long double x2, long double y1, long double y2
 	}
 	long double C = 2 * pi * R;
 	long double deltaT = abs(x2 - x1);
-	Lamta = (long double)((int)((C * 5 / deltaT)));
+	Lamta = (long double)((int)((C * 20 / deltaT)));
 	if (Lamta < 40) {
 		Lamta = 40;
 	}
 
 
 	long double S = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
-	printf("Á½µã¼ä¾àÀë£º%Lf\n", S);
-	//cout << "Á½µã¼ä¾àÀë£º" << S << endl;
+	printf("ä¸¤ç‚¹é—´è·ç¦»ï¼š%Lf\n", S);
+	//cout << "ä¸¤ç‚¹é—´è·ç¦»ï¼š" << S << endl;
 	long double Theta = acos(S / (2 * R));
-	printf("Theta£º%Lf\n", Theta);
-	//cout << "Theta£º" << Theta << endl;
+	printf("Thetaï¼š%Lf\n", Theta);
+	//cout << "Thetaï¼š" << Theta << endl;
 	long double Phi = pi - (2 * Theta);
-	printf("Phi£º%Lf\n", Phi);
-	//cout << "Phi£º" << Phi << endl;
+	printf("Phiï¼š%Lf\n", Phi);
+	//cout << "Phiï¼š" << Phi << endl;
 	long double TTT = ((Center.x - L1.b) / L1.k);
 	long double Omega = 0.0;
 	if (Mode_Tr[1] == 1)
@@ -1275,7 +1300,7 @@ void Round_line_2(long double x1, long double x2, long double y1, long double y2
 	long double R_of_Y = (x2-x1) / 2.0;
 	long double omega_of_y = pi / (deltaT * Lamta);
 	double XXX = 1 / Lamta;
-	int deltaT2 = (int)x1;//×ª»»ÎªÕûĞÎ
+	int deltaT2 = (int)x1;//è½¬æ¢ä¸ºæ•´å½¢
 	if (Mode_of_Y[1] == -1) {
 		omega_of_y = 0.0-omega_of_y;
 	}
@@ -1360,18 +1385,18 @@ void Round_line_3(long double x1, long double x2, long double y1, long double y2
 				}
 			}
 			printf(
-				"ÉÏÒ»´ÎÔ²ĞÄ£º%Lf %Lf\n"
-				"Ô²ĞÄ£º%Lf %Lf\n"
-				"R=%Lf\nÄ£Ê½£º%d\n",
+				"ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š%Lf %Lf\n"
+				"åœ†å¿ƒï¼š%Lf %Lf\n"
+				"R=%Lf\næ¨¡å¼ï¼š%d\n",
 				Later_Center_Truck[2].z, Later_Center_Truck[2].x,
 				Center.z, Center.x,
 				R, Mode_Tr[2]
 			);
 			/*
-			cout << "ÉÏÒ»´ÎÔ²ĞÄ£º" << Later_Center.z << " " << Later_Center.x << endl;
-			cout << "Ô²ĞÄ£º" << Center.z << " " << Center.x << endl;
+			cout << "ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š" << Later_Center.z << " " << Later_Center.x << endl;
+			cout << "åœ†å¿ƒï¼š" << Center.z << " " << Center.x << endl;
 			cout << "R=" << R << endl;
-			cout << "Ä£Ê½£º" << Mode_Tr[2] << endl;
+			cout << "æ¨¡å¼ï¼š" << Mode_Tr[2] << endl;
 			*/
 			Later_Center_Truck[2] = Center;
 			if (R > 200) {
@@ -1382,21 +1407,21 @@ void Round_line_3(long double x1, long double x2, long double y1, long double y2
 	}
 	long double C = 2 * pi * R;
 	long double deltaT = abs(x2 - x1);
-	Lamta = (long double)((int)((C * 5 / deltaT)));
+	Lamta = (long double)((int)((C * 20 / deltaT)));
 	if (Lamta < 40) {
 		Lamta = 40;
 	}
 
 
 	long double S = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
-	printf("Á½µã¼ä¾àÀë£º%Lf\n", S);
-	//cout << "Á½µã¼ä¾àÀë£º" << S << endl;
+	printf("ä¸¤ç‚¹é—´è·ç¦»ï¼š%Lf\n", S);
+	//cout << "ä¸¤ç‚¹é—´è·ç¦»ï¼š" << S << endl;
 	long double Theta = acos(S / (2 * R));
-	printf("Theta£º%Lf\n", Theta);
-	//cout << "Theta£º" << Theta << endl;
+	printf("Thetaï¼š%Lf\n", Theta);
+	//cout << "Thetaï¼š" << Theta << endl;
 	long double Phi = pi - (2 * Theta);
-	printf("Phi£º%Lf\n", Phi);
-	//cout << "Phi£º" << Phi << endl;
+	printf("Phiï¼š%Lf\n", Phi);
+	//cout << "Phiï¼š" << Phi << endl;
 	long double TTT = ((Center.x - L1.b) / L1.k);
 	long double Omega = 0.0;
 	if (Mode_Tr[2] == 1)
@@ -1441,7 +1466,7 @@ void Round_line_3(long double x1, long double x2, long double y1, long double y2
 	long double R_of_Y = (x2-x1) / 2.0;
 	long double omega_of_y = pi / (deltaT * Lamta);
 	double XXX = 1 / Lamta;
-	int deltaT2 = (int)x1;//×ª»»ÎªÕûĞÎ
+	int deltaT2 = (int)x1;//è½¬æ¢ä¸ºæ•´å½¢
 	if (Mode_of_Y[2] == -1) {
 		omega_of_y = 0.0-omega_of_y;
 	}
@@ -1526,18 +1551,18 @@ void Round_line_4(long double x1, long double x2, long double y1, long double y2
 				}
 			}
 			printf(
-				"ÉÏÒ»´ÎÔ²ĞÄ£º%Lf %Lf\n"
-				"Ô²ĞÄ£º%Lf %Lf\n"
-				"R=%Lf\nÄ£Ê½£º%d\n",
+				"ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š%Lf %Lf\n"
+				"åœ†å¿ƒï¼š%Lf %Lf\n"
+				"R=%Lf\næ¨¡å¼ï¼š%d\n",
 				Later_Center_Truck[3].z, Later_Center_Truck[3].x,
 				Center.z, Center.x,
 				R, Mode_Tr[3]
 			);
 			/*
-			cout << "ÉÏÒ»´ÎÔ²ĞÄ£º" << Later_Center.z << " " << Later_Center.x << endl;
-			cout << "Ô²ĞÄ£º" << Center.z << " " << Center.x << endl;
+			cout << "ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š" << Later_Center.z << " " << Later_Center.x << endl;
+			cout << "åœ†å¿ƒï¼š" << Center.z << " " << Center.x << endl;
 			cout << "R=" << R << endl;
-			cout << "Ä£Ê½£º" << Mode_Tr[3] << endl;
+			cout << "æ¨¡å¼ï¼š" << Mode_Tr[3] << endl;
 			*/
 			Later_Center_Truck[3] = Center;
 			if (R > 200) {
@@ -1548,21 +1573,21 @@ void Round_line_4(long double x1, long double x2, long double y1, long double y2
 	}
 	long double C = 2 * pi * R;
 	long double deltaT = abs(x2 - x1);
-	Lamta = (long double)((int)((C * 5 / deltaT)));
+	Lamta = (long double)((int)((C * 20 / deltaT)));
 	if (Lamta < 40) {
 		Lamta = 40;
 	}
 
 
 	long double S = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
-	printf("Á½µã¼ä¾àÀë£º%Lf\n", S);
-	//cout << "Á½µã¼ä¾àÀë£º" << S << endl;
+	printf("ä¸¤ç‚¹é—´è·ç¦»ï¼š%Lf\n", S);
+	//cout << "ä¸¤ç‚¹é—´è·ç¦»ï¼š" << S << endl;
 	long double Theta = acos(S / (2 * R));
-	printf("Theta£º%Lf\n", Theta);
-	//cout << "Theta£º" << Theta << endl;
+	printf("Thetaï¼š%Lf\n", Theta);
+	//cout << "Thetaï¼š" << Theta << endl;
 	long double Phi = pi - (2 * Theta);
-	printf("Phi£º%Lf\n", Phi);
-	//cout << "Phi£º" << Phi << endl;
+	printf("Phiï¼š%Lf\n", Phi);
+	//cout << "Phiï¼š" << Phi << endl;
 	long double TTT = ((Center.x - L1.b) / L1.k);
 	long double Omega = 0.0;
 	if (Mode_Tr[3] == 1)
@@ -1607,7 +1632,7 @@ void Round_line_4(long double x1, long double x2, long double y1, long double y2
 	long double R_of_Y = (x2-x1) / 2.0;
 	long double omega_of_y = pi / (deltaT * Lamta);
 	double XXX = 1 / Lamta;
-	int deltaT2 = (int)x1;//×ª»»ÎªÕûĞÎ
+	int deltaT2 = (int)x1;//è½¬æ¢ä¸ºæ•´å½¢
 	if (Mode_of_Y[3] == -1) {
 		omega_of_y = 0.0-omega_of_y;
 	}
@@ -1692,18 +1717,18 @@ void Round_line_5(long double x1, long double x2, long double y1, long double y2
 				}
 			}
 			printf(
-				"ÉÏÒ»´ÎÔ²ĞÄ£º%Lf %Lf\n"
-				"Ô²ĞÄ£º%Lf %Lf\n"
-				"R=%Lf\nÄ£Ê½£º%d\n",
+				"ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š%Lf %Lf\n"
+				"åœ†å¿ƒï¼š%Lf %Lf\n"
+				"R=%Lf\næ¨¡å¼ï¼š%d\n",
 				Later_Center_Truck[4].z, Later_Center_Truck[4].x,
 				Center.z, Center.x,
 				R, Mode_Tr[4]
 			);
 			/*
-			cout << "ÉÏÒ»´ÎÔ²ĞÄ£º" << Later_Center.z << " " << Later_Center.x << endl;
-			cout << "Ô²ĞÄ£º" << Center.z << " " << Center.x << endl;
+			cout << "ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š" << Later_Center.z << " " << Later_Center.x << endl;
+			cout << "åœ†å¿ƒï¼š" << Center.z << " " << Center.x << endl;
 			cout << "R=" << R << endl;
-			cout << "Ä£Ê½£º" << Mode_Tr[4] << endl;
+			cout << "æ¨¡å¼ï¼š" << Mode_Tr[4] << endl;
 			*/
 			Later_Center_Truck[4] = Center;
 			if (R > 200) {
@@ -1714,21 +1739,21 @@ void Round_line_5(long double x1, long double x2, long double y1, long double y2
 	}
 	long double C = 2 * pi * R;
 	long double deltaT = abs(x2 - x1);
-	Lamta = (long double)((int)((C * 5 / deltaT)));
+	Lamta = (long double)((int)((C * 20 / deltaT)));
 	if (Lamta < 40) {
 		Lamta = 40;
 	}
 
 
 	long double S = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
-	printf("Á½µã¼ä¾àÀë£º%Lf\n", S);
-	//cout << "Á½µã¼ä¾àÀë£º" << S << endl;
+	printf("ä¸¤ç‚¹é—´è·ç¦»ï¼š%Lf\n", S);
+	//cout << "ä¸¤ç‚¹é—´è·ç¦»ï¼š" << S << endl;
 	long double Theta = acos(S / (2 * R));
-	printf("Theta£º%Lf\n", Theta);
-	//cout << "Theta£º" << Theta << endl;
+	printf("Thetaï¼š%Lf\n", Theta);
+	//cout << "Thetaï¼š" << Theta << endl;
 	long double Phi = pi - (2 * Theta);
-	printf("Phi£º%Lf\n", Phi);
-	//cout << "Phi£º" << Phi << endl;
+	printf("Phiï¼š%Lf\n", Phi);
+	//cout << "Phiï¼š" << Phi << endl;
 	long double TTT = ((Center.x - L1.b) / L1.k);
 	long double Omega = 0.0;
 	if (Mode_Tr[4] == 1)
@@ -1773,7 +1798,7 @@ void Round_line_5(long double x1, long double x2, long double y1, long double y2
 	long double R_of_Y = (x2-x1) / 2.0;
 	long double omega_of_y = pi / (deltaT * Lamta);
 	double XXX = 1 / Lamta;
-	int deltaT2 = (int)x1;//×ª»»ÎªÕûĞÎ
+	int deltaT2 = (int)x1;//è½¬æ¢ä¸ºæ•´å½¢
 	if (Mode_of_Y[4] == -1) {
 		omega_of_y = 0.0-omega_of_y;
 	}
@@ -1858,18 +1883,18 @@ void Round_line_6(long double x1, long double x2, long double y1, long double y2
 				}
 			}
 			printf(
-				"ÉÏÒ»´ÎÔ²ĞÄ£º%Lf %Lf\n"
-				"Ô²ĞÄ£º%Lf %Lf\n"
-				"R=%Lf\nÄ£Ê½£º%d\n",
+				"ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š%Lf %Lf\n"
+				"åœ†å¿ƒï¼š%Lf %Lf\n"
+				"R=%Lf\næ¨¡å¼ï¼š%d\n",
 				Later_Center_Truck[5].z, Later_Center_Truck[5].x,
 				Center.z, Center.x,
 				R, Mode_Tr[5]
 			);
 			/*
-			cout << "ÉÏÒ»´ÎÔ²ĞÄ£º" << Later_Center.z << " " << Later_Center.x << endl;
-			cout << "Ô²ĞÄ£º" << Center.z << " " << Center.x << endl;
+			cout << "ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š" << Later_Center.z << " " << Later_Center.x << endl;
+			cout << "åœ†å¿ƒï¼š" << Center.z << " " << Center.x << endl;
 			cout << "R=" << R << endl;
-			cout << "Ä£Ê½£º" << Mode_Tr[5] << endl;
+			cout << "æ¨¡å¼ï¼š" << Mode_Tr[5] << endl;
 			*/
 			Later_Center_Truck[5] = Center;
 			if (R > 200) {
@@ -1880,21 +1905,21 @@ void Round_line_6(long double x1, long double x2, long double y1, long double y2
 	}
 	long double C = 2 * pi * R;
 	long double deltaT = abs(x2 - x1);
-	Lamta = (long double)((int)((C * 5 / deltaT)));
+	Lamta = (long double)((int)((C * 20 / deltaT)));
 	if (Lamta < 40) {
 		Lamta = 40;
 	}
 
 
 	long double S = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
-	printf("Á½µã¼ä¾àÀë£º%Lf\n", S);
-	//cout << "Á½µã¼ä¾àÀë£º" << S << endl;
+	printf("ä¸¤ç‚¹é—´è·ç¦»ï¼š%Lf\n", S);
+	//cout << "ä¸¤ç‚¹é—´è·ç¦»ï¼š" << S << endl;
 	long double Theta = acos(S / (2 * R));
-	printf("Theta£º%Lf\n", Theta);
-	//cout << "Theta£º" << Theta << endl;
+	printf("Thetaï¼š%Lf\n", Theta);
+	//cout << "Thetaï¼š" << Theta << endl;
 	long double Phi = pi - (2 * Theta);
-	printf("Phi£º%Lf\n", Phi);
-	//cout << "Phi£º" << Phi << endl;
+	printf("Phiï¼š%Lf\n", Phi);
+	//cout << "Phiï¼š" << Phi << endl;
 	long double TTT = ((Center.x - L1.b) / L1.k);
 	long double Omega = 0.0;
 	if (Mode_Tr[5] == 1)
@@ -1939,7 +1964,7 @@ void Round_line_6(long double x1, long double x2, long double y1, long double y2
 	long double R_of_Y = (x2-x1) / 2.0;
 	long double omega_of_y = pi / (deltaT * Lamta);
 	double XXX = 1 / Lamta;
-	int deltaT2 = (int)x1;//×ª»»ÎªÕûĞÎ
+	int deltaT2 = (int)x1;//è½¬æ¢ä¸ºæ•´å½¢
 	if (Mode_of_Y[5] == -1) {
 		omega_of_y = 0.0-omega_of_y;
 	}
@@ -1989,7 +2014,7 @@ void Round_Truck(long double x1, long double x2, long double y1, long double y2,
 	}
 }
 
-//ÀëÉ¢Á¬ĞøÏàÇĞÔ²
+//ç¦»æ•£è¿ç»­ç›¸åˆ‡åœ†
 void Round_line_1_lisan(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD)
 {
 
@@ -2064,18 +2089,18 @@ void Round_line_1_lisan(long double x1, long double x2, long double y1, long dou
 				}
 			}
 			printf(
-				"ÉÏÒ»´ÎÔ²ĞÄ£º%Lf %Lf\n"
-				"Ô²ĞÄ£º%Lf %Lf\n"
-				"R=%Lf\nÄ£Ê½£º%d\n",
+				"ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š%Lf %Lf\n"
+				"åœ†å¿ƒï¼š%Lf %Lf\n"
+				"R=%Lf\næ¨¡å¼ï¼š%d\n",
 				Later_Center_Truck[0].z, Later_Center_Truck[0].x,
 				Center.z, Center.x,
 				R, Mode_Tr[0]
 			);
 			/*
-			cout << "ÉÏÒ»´ÎÔ²ĞÄ£º" << Later_Center.z << " " << Later_Center.x << endl;
-			cout << "Ô²ĞÄ£º" << Center.z << " " << Center.x << endl;
+			cout << "ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š" << Later_Center.z << " " << Later_Center.x << endl;
+			cout << "åœ†å¿ƒï¼š" << Center.z << " " << Center.x << endl;
 			cout << "R=" << R << endl;
-			cout << "Ä£Ê½£º" << Mode_Tr[0] << endl;
+			cout << "æ¨¡å¼ï¼š" << Mode_Tr[0] << endl;
 			*/
 			Later_Center_Truck[0] = Center;
 			if (R > 200) {
@@ -2086,21 +2111,21 @@ void Round_line_1_lisan(long double x1, long double x2, long double y1, long dou
 	}
 	long double C = 2 * pi * R;
 	long double deltaT = abs(x2 - x1);
-	Lamta = (long double)((int)((C * 5 / deltaT)));
+	Lamta = (long double)((int)((C * 20 / deltaT)));
 	if (Lamta < 40) {
 		Lamta = 40;
 	}
 
 
 	long double S = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
-	printf("Á½µã¼ä¾àÀë£º%Lf\n", S);
-	//cout << "Á½µã¼ä¾àÀë£º" << S << endl;
+	printf("ä¸¤ç‚¹é—´è·ç¦»ï¼š%Lf\n", S);
+	//cout << "ä¸¤ç‚¹é—´è·ç¦»ï¼š" << S << endl;
 	long double Theta = acos(S / (2 * R));
-	printf("Theta£º%Lf\n", Theta);
-	//cout << "Theta£º" << Theta << endl;
+	printf("Thetaï¼š%Lf\n", Theta);
+	//cout << "Thetaï¼š" << Theta << endl;
 	long double Phi = pi - (2 * Theta);
-	printf("Phi£º%Lf\n", Phi);
-	//cout << "Phi£º" << Phi << endl;
+	printf("Phiï¼š%Lf\n", Phi);
+	//cout << "Phiï¼š" << Phi << endl;
 	long double TTT = ((Center.x - L1.b) / L1.k);
 	long double Omega = 0.0;
 	if (Mode_Tr[0] == 1)
@@ -2145,16 +2170,16 @@ void Round_line_1_lisan(long double x1, long double x2, long double y1, long dou
 	long double R_of_Y = (x2 - x1) / 2.0;
 	long double omega_of_y = pi / (deltaT * Lamta);
 	double XXX = 1 / deltaT * Lamta;
-	int deltaT2 = (int)x1;//×ª»»ÎªÕûĞÎ
+	int deltaT2 = (int)x1;//è½¬æ¢ä¸ºæ•´å½¢
 	if (Mode_of_Y[0] == -1) {
 		omega_of_y = 0.0 - omega_of_y;
 	}
 
 	if (Mode_Tr[0] == -1) {
-		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f + %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f + %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT* Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT* Lamta, deltaT* Lamta, deltaT* Lamta, (int)Lamta, 0.5);
+		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f + %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f + %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT* Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT* Lamta, deltaT* Lamta, deltaT* Lamta, (int)Lamta, 0.5);
 	}
 	else {
-		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f - %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f - %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
+		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f - %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f - %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
 	}
 	Init_T[0] = 1;
 	Mode_of_Y[0] *= -1;
@@ -2230,18 +2255,18 @@ void Round_line_2_lisan(long double x1, long double x2, long double y1, long dou
 				}
 			}
 			printf(
-				"ÉÏÒ»´ÎÔ²ĞÄ£º%Lf %Lf\n"
-				"Ô²ĞÄ£º%Lf %Lf\n"
-				"R=%Lf\nÄ£Ê½£º%d\n",
+				"ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š%Lf %Lf\n"
+				"åœ†å¿ƒï¼š%Lf %Lf\n"
+				"R=%Lf\næ¨¡å¼ï¼š%d\n",
 				Later_Center_Truck[1].z, Later_Center_Truck[1].x,
 				Center.z, Center.x,
 				R, Mode_Tr[1]
 			);
 			/*
-			cout << "ÉÏÒ»´ÎÔ²ĞÄ£º" << Later_Center.z << " " << Later_Center.x << endl;
-			cout << "Ô²ĞÄ£º" << Center.z << " " << Center.x << endl;
+			cout << "ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š" << Later_Center.z << " " << Later_Center.x << endl;
+			cout << "åœ†å¿ƒï¼š" << Center.z << " " << Center.x << endl;
 			cout << "R=" << R << endl;
-			cout << "Ä£Ê½£º" << Mode_Tr[1] << endl;
+			cout << "æ¨¡å¼ï¼š" << Mode_Tr[1] << endl;
 			*/
 			Later_Center_Truck[1] = Center;
 			if (R > 200) {
@@ -2252,21 +2277,21 @@ void Round_line_2_lisan(long double x1, long double x2, long double y1, long dou
 	}
 	long double C = 2 * pi * R;
 	long double deltaT = abs(x2 - x1);
-	Lamta = (long double)((int)((C * 5 / deltaT)));
+	Lamta = (long double)((int)((C * 20 / deltaT)));
 	if (Lamta < 40) {
 		Lamta = 40;
 	}
 
 
 	long double S = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
-	printf("Á½µã¼ä¾àÀë£º%Lf\n", S);
-	//cout << "Á½µã¼ä¾àÀë£º" << S << endl;
+	printf("ä¸¤ç‚¹é—´è·ç¦»ï¼š%Lf\n", S);
+	//cout << "ä¸¤ç‚¹é—´è·ç¦»ï¼š" << S << endl;
 	long double Theta = acos(S / (2 * R));
-	printf("Theta£º%Lf\n", Theta);
-	//cout << "Theta£º" << Theta << endl;
+	printf("Thetaï¼š%Lf\n", Theta);
+	//cout << "Thetaï¼š" << Theta << endl;
 	long double Phi = pi - (2 * Theta);
-	printf("Phi£º%Lf\n", Phi);
-	//cout << "Phi£º" << Phi << endl;
+	printf("Phiï¼š%Lf\n", Phi);
+	//cout << "Phiï¼š" << Phi << endl;
 	long double TTT = ((Center.x - L1.b) / L1.k);
 	long double Omega = 0.0;
 	if (Mode_Tr[1] == 1)
@@ -2311,15 +2336,15 @@ void Round_line_2_lisan(long double x1, long double x2, long double y1, long dou
 	long double R_of_Y = (x2 - x1) / 2.0;
 	long double omega_of_y = pi / (deltaT * Lamta);
 	double XXX = 1 / Lamta;
-	int deltaT2 = (int)x1;//×ª»»ÎªÕûĞÎ
+	int deltaT2 = (int)x1;//è½¬æ¢ä¸ºæ•´å½¢
 	if (Mode_of_Y[1] == -1) {
 		omega_of_y = 0.0 - omega_of_y;
 	}
 	if (Mode_Tr[1] == -1) {
-		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f + %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f + %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT* Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT* Lamta, deltaT* Lamta, deltaT* Lamta, (int)Lamta, 0.5);
+		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f + %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f + %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT* Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT* Lamta, deltaT* Lamta, deltaT* Lamta, (int)Lamta, 0.5);
 	}
 	else {
-		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f - %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f - %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
+		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f - %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f - %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
 	}
 	Init_T[1] = 1;
 	Mode_of_Y[1] *= -1;
@@ -2396,18 +2421,18 @@ void Round_line_3_lisan(long double x1, long double x2, long double y1, long dou
 				}
 			}
 			printf(
-				"ÉÏÒ»´ÎÔ²ĞÄ£º%Lf %Lf\n"
-				"Ô²ĞÄ£º%Lf %Lf\n"
-				"R=%Lf\nÄ£Ê½£º%d\n",
+				"ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š%Lf %Lf\n"
+				"åœ†å¿ƒï¼š%Lf %Lf\n"
+				"R=%Lf\næ¨¡å¼ï¼š%d\n",
 				Later_Center_Truck[2].z, Later_Center_Truck[2].x,
 				Center.z, Center.x,
 				R, Mode_Tr[2]
 			);
 			/*
-			cout << "ÉÏÒ»´ÎÔ²ĞÄ£º" << Later_Center.z << " " << Later_Center.x << endl;
-			cout << "Ô²ĞÄ£º" << Center.z << " " << Center.x << endl;
+			cout << "ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š" << Later_Center.z << " " << Later_Center.x << endl;
+			cout << "åœ†å¿ƒï¼š" << Center.z << " " << Center.x << endl;
 			cout << "R=" << R << endl;
-			cout << "Ä£Ê½£º" << Mode_Tr[2] << endl;
+			cout << "æ¨¡å¼ï¼š" << Mode_Tr[2] << endl;
 			*/
 			Later_Center_Truck[2] = Center;
 			if (R > 200) {
@@ -2418,21 +2443,21 @@ void Round_line_3_lisan(long double x1, long double x2, long double y1, long dou
 	}
 	long double C = 2 * pi * R;
 	long double deltaT = abs(x2 - x1);
-	Lamta = (long double)((int)((C * 5 / deltaT)));
+	Lamta = (long double)((int)((C * 20 / deltaT)));
 	if (Lamta < 40) {
 		Lamta = 40;
 	}
 
 
 	long double S = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
-	printf("Á½µã¼ä¾àÀë£º%Lf\n", S);
-	//cout << "Á½µã¼ä¾àÀë£º" << S << endl;
+	printf("ä¸¤ç‚¹é—´è·ç¦»ï¼š%Lf\n", S);
+	//cout << "ä¸¤ç‚¹é—´è·ç¦»ï¼š" << S << endl;
 	long double Theta = acos(S / (2 * R));
-	printf("Theta£º%Lf\n", Theta);
-	//cout << "Theta£º" << Theta << endl;
+	printf("Thetaï¼š%Lf\n", Theta);
+	//cout << "Thetaï¼š" << Theta << endl;
 	long double Phi = pi - (2 * Theta);
-	printf("Phi£º%Lf\n", Phi);
-	//cout << "Phi£º" << Phi << endl;
+	printf("Phiï¼š%Lf\n", Phi);
+	//cout << "Phiï¼š" << Phi << endl;
 	long double TTT = ((Center.x - L1.b) / L1.k);
 	long double Omega = 0.0;
 	if (Mode_Tr[2] == 1)
@@ -2477,15 +2502,15 @@ void Round_line_3_lisan(long double x1, long double x2, long double y1, long dou
 	long double R_of_Y = (x2 - x1) / 2.0;
 	long double omega_of_y = pi / (deltaT * Lamta);
 	double XXX = 1 / Lamta;
-	int deltaT2 = (int)x1;//×ª»»ÎªÕûĞÎ
+	int deltaT2 = (int)x1;//è½¬æ¢ä¸ºæ•´å½¢
 	if (Mode_of_Y[2] == -1) {
 		omega_of_y = 0.0 - omega_of_y;
 	}
 	if (Mode_Tr[2] == -1) {
-		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f + %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f + %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT* Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT* Lamta, deltaT* Lamta, deltaT* Lamta, (int)Lamta, 0.5);
+		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f + %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f + %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT* Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT* Lamta, deltaT* Lamta, deltaT* Lamta, (int)Lamta, 0.5);
 	}
 	else {
-		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f - %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f - %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
+		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f - %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f - %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
 	}
 	Init_T[2] = 1;
 	Mode_of_Y[2] *= -1;
@@ -2562,18 +2587,18 @@ void Round_line_4_lisan(long double x1, long double x2, long double y1, long dou
 				}
 			}
 			printf(
-				"ÉÏÒ»´ÎÔ²ĞÄ£º%Lf %Lf\n"
-				"Ô²ĞÄ£º%Lf %Lf\n"
-				"R=%Lf\nÄ£Ê½£º%d\n",
+				"ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š%Lf %Lf\n"
+				"åœ†å¿ƒï¼š%Lf %Lf\n"
+				"R=%Lf\næ¨¡å¼ï¼š%d\n",
 				Later_Center_Truck[3].z, Later_Center_Truck[3].x,
 				Center.z, Center.x,
 				R, Mode_Tr[3]
 			);
 			/*
-			cout << "ÉÏÒ»´ÎÔ²ĞÄ£º" << Later_Center.z << " " << Later_Center.x << endl;
-			cout << "Ô²ĞÄ£º" << Center.z << " " << Center.x << endl;
+			cout << "ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š" << Later_Center.z << " " << Later_Center.x << endl;
+			cout << "åœ†å¿ƒï¼š" << Center.z << " " << Center.x << endl;
 			cout << "R=" << R << endl;
-			cout << "Ä£Ê½£º" << Mode_Tr[3] << endl;
+			cout << "æ¨¡å¼ï¼š" << Mode_Tr[3] << endl;
 			*/
 			Later_Center_Truck[3] = Center;
 			if (R > 200) {
@@ -2584,21 +2609,21 @@ void Round_line_4_lisan(long double x1, long double x2, long double y1, long dou
 	}
 	long double C = 2 * pi * R;
 	long double deltaT = abs(x2 - x1);
-	Lamta = (long double)((int)((C * 5 / deltaT)));
+	Lamta = (long double)((int)((C * 20 / deltaT)));
 	if (Lamta < 40) {
 		Lamta = 40;
 	}
 
 
 	long double S = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
-	printf("Á½µã¼ä¾àÀë£º%Lf\n", S);
-	//cout << "Á½µã¼ä¾àÀë£º" << S << endl;
+	printf("ä¸¤ç‚¹é—´è·ç¦»ï¼š%Lf\n", S);
+	//cout << "ä¸¤ç‚¹é—´è·ç¦»ï¼š" << S << endl;
 	long double Theta = acos(S / (2 * R));
-	printf("Theta£º%Lf\n", Theta);
-	//cout << "Theta£º" << Theta << endl;
+	printf("Thetaï¼š%Lf\n", Theta);
+	//cout << "Thetaï¼š" << Theta << endl;
 	long double Phi = pi - (2 * Theta);
-	printf("Phi£º%Lf\n", Phi);
-	//cout << "Phi£º" << Phi << endl;
+	printf("Phiï¼š%Lf\n", Phi);
+	//cout << "Phiï¼š" << Phi << endl;
 	long double TTT = ((Center.x - L1.b) / L1.k);
 	long double Omega = 0.0;
 	if (Mode_Tr[3] == 1)
@@ -2643,15 +2668,15 @@ void Round_line_4_lisan(long double x1, long double x2, long double y1, long dou
 	long double R_of_Y = (x2 - x1) / 2.0;
 	long double omega_of_y = pi / (deltaT * Lamta);
 	double XXX = 1 / Lamta;
-	int deltaT2 = (int)x1;//×ª»»ÎªÕûĞÎ
+	int deltaT2 = (int)x1;//è½¬æ¢ä¸ºæ•´å½¢
 	if (Mode_of_Y[3] == -1) {
 		omega_of_y = 0.0 - omega_of_y;
 	}
 	if (Mode_Tr[3] == -1) {
-		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f + %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f + %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT* Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT* Lamta, deltaT* Lamta, deltaT* Lamta, (int)Lamta, 0.5);
+		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f + %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f + %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT* Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT* Lamta, deltaT* Lamta, deltaT* Lamta, (int)Lamta, 0.5);
 	}
 	else {
-		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f - %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f - %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
+		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f - %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f - %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
 	}
 	Init_T[3] = 1;
 	Mode_of_Y[3] *= -1;
@@ -2728,18 +2753,18 @@ void Round_line_5_lisan(long double x1, long double x2, long double y1, long dou
 				}
 			}
 			printf(
-				"ÉÏÒ»´ÎÔ²ĞÄ£º%Lf %Lf\n"
-				"Ô²ĞÄ£º%Lf %Lf\n"
-				"R=%Lf\nÄ£Ê½£º%d\n",
+				"ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š%Lf %Lf\n"
+				"åœ†å¿ƒï¼š%Lf %Lf\n"
+				"R=%Lf\næ¨¡å¼ï¼š%d\n",
 				Later_Center_Truck[4].z, Later_Center_Truck[4].x,
 				Center.z, Center.x,
 				R, Mode_Tr[4]
 			);
 			/*
-			cout << "ÉÏÒ»´ÎÔ²ĞÄ£º" << Later_Center.z << " " << Later_Center.x << endl;
-			cout << "Ô²ĞÄ£º" << Center.z << " " << Center.x << endl;
+			cout << "ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š" << Later_Center.z << " " << Later_Center.x << endl;
+			cout << "åœ†å¿ƒï¼š" << Center.z << " " << Center.x << endl;
 			cout << "R=" << R << endl;
-			cout << "Ä£Ê½£º" << Mode_Tr[4] << endl;
+			cout << "æ¨¡å¼ï¼š" << Mode_Tr[4] << endl;
 			*/
 			Later_Center_Truck[4] = Center;
 			if (R > 200) {
@@ -2750,21 +2775,21 @@ void Round_line_5_lisan(long double x1, long double x2, long double y1, long dou
 	}
 	long double C = 2 * pi * R;
 	long double deltaT = abs(x2 - x1);
-	Lamta = (long double)((int)((C * 5 / deltaT)));
+	Lamta = (long double)((int)((C * 20 / deltaT)));
 	if (Lamta < 40) {
 		Lamta = 40;
 	}
 
 
 	long double S = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
-	printf("Á½µã¼ä¾àÀë£º%Lf\n", S);
-	//cout << "Á½µã¼ä¾àÀë£º" << S << endl;
+	printf("ä¸¤ç‚¹é—´è·ç¦»ï¼š%Lf\n", S);
+	//cout << "ä¸¤ç‚¹é—´è·ç¦»ï¼š" << S << endl;
 	long double Theta = acos(S / (2 * R));
-	printf("Theta£º%Lf\n", Theta);
-	//cout << "Theta£º" << Theta << endl;
+	printf("Thetaï¼š%Lf\n", Theta);
+	//cout << "Thetaï¼š" << Theta << endl;
 	long double Phi = pi - (2 * Theta);
-	printf("Phi£º%Lf\n", Phi);
-	//cout << "Phi£º" << Phi << endl;
+	printf("Phiï¼š%Lf\n", Phi);
+	//cout << "Phiï¼š" << Phi << endl;
 	long double TTT = ((Center.x - L1.b) / L1.k);
 	long double Omega = 0.0;
 	if (Mode_Tr[4] == 1)
@@ -2809,15 +2834,15 @@ void Round_line_5_lisan(long double x1, long double x2, long double y1, long dou
 	long double R_of_Y = (x2 - x1) / 2.0;
 	long double omega_of_y = pi / (deltaT * Lamta);
 	double XXX = 1 / Lamta;
-	int deltaT2 = (int)x1;//×ª»»ÎªÕûĞÎ
+	int deltaT2 = (int)x1;//è½¬æ¢ä¸ºæ•´å½¢
 	if (Mode_of_Y[4] == -1) {
 		omega_of_y = 0.0 - omega_of_y;
 	}
 	if (Mode_Tr[4] == -1) {
-		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f + %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f + %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT* Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT* Lamta, deltaT* Lamta, deltaT* Lamta, (int)Lamta, 0.5);
+		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f + %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f + %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT* Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT* Lamta, deltaT* Lamta, deltaT* Lamta, (int)Lamta, 0.5);
 	}
 	else {
-		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f - %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f - %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
+		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f - %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f - %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
 	}
 	Init_T[4] = 1;
 	Mode_of_Y[4] *= -1;
@@ -2894,18 +2919,18 @@ void Round_line_6_lisan(long double x1, long double x2, long double y1, long dou
 				}
 			}
 			printf(
-				"ÉÏÒ»´ÎÔ²ĞÄ£º%Lf %Lf\n"
-				"Ô²ĞÄ£º%Lf %Lf\n"
-				"R=%Lf\nÄ£Ê½£º%d\n",
+				"ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š%Lf %Lf\n"
+				"åœ†å¿ƒï¼š%Lf %Lf\n"
+				"R=%Lf\næ¨¡å¼ï¼š%d\n",
 				Later_Center_Truck[5].z, Later_Center_Truck[5].x,
 				Center.z, Center.x,
 				R, Mode_Tr[5]
 			);
 			/*
-			cout << "ÉÏÒ»´ÎÔ²ĞÄ£º" << Later_Center.z << " " << Later_Center.x << endl;
-			cout << "Ô²ĞÄ£º" << Center.z << " " << Center.x << endl;
+			cout << "ä¸Šä¸€æ¬¡åœ†å¿ƒï¼š" << Later_Center.z << " " << Later_Center.x << endl;
+			cout << "åœ†å¿ƒï¼š" << Center.z << " " << Center.x << endl;
 			cout << "R=" << R << endl;
-			cout << "Ä£Ê½£º" << Mode_Tr[5] << endl;
+			cout << "æ¨¡å¼ï¼š" << Mode_Tr[5] << endl;
 			*/
 			Later_Center_Truck[5] = Center;
 			if (R > 200) {
@@ -2916,21 +2941,21 @@ void Round_line_6_lisan(long double x1, long double x2, long double y1, long dou
 	}
 	long double C = 2 * pi * R;
 	long double deltaT = abs(x2 - x1);
-	Lamta = (long double)((int)((C * 5 / deltaT)));
+	Lamta = (long double)((int)((C * 20 / deltaT)));
 	if (Lamta < 40) {
 		Lamta = 40;
 	}
 
 
 	long double S = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
-	printf("Á½µã¼ä¾àÀë£º%Lf\n", S);
-	//cout << "Á½µã¼ä¾àÀë£º" << S << endl;
+	printf("ä¸¤ç‚¹é—´è·ç¦»ï¼š%Lf\n", S);
+	//cout << "ä¸¤ç‚¹é—´è·ç¦»ï¼š" << S << endl;
 	long double Theta = acos(S / (2 * R));
-	printf("Theta£º%Lf\n", Theta);
-	//cout << "Theta£º" << Theta << endl;
+	printf("Thetaï¼š%Lf\n", Theta);
+	//cout << "Thetaï¼š" << Theta << endl;
 	long double Phi = pi - (2 * Theta);
-	printf("Phi£º%Lf\n", Phi);
-	//cout << "Phi£º" << Phi << endl;
+	printf("Phiï¼š%Lf\n", Phi);
+	//cout << "Phiï¼š" << Phi << endl;
 	long double TTT = ((Center.x - L1.b) / L1.k);
 	long double Omega = 0.0;
 	if (Mode_Tr[5] == 1)
@@ -2975,15 +3000,15 @@ void Round_line_6_lisan(long double x1, long double x2, long double y1, long dou
 	long double R_of_Y = (x2 - x1) / 2.0;
 	long double omega_of_y = pi / (deltaT * Lamta);
 	double XXX = 1 / Lamta;
-	int deltaT2 = (int)x1;//×ª»»ÎªÕûĞÎ
+	int deltaT2 = (int)x1;//è½¬æ¢ä¸ºæ•´å½¢
 	if (Mode_of_Y[5] == -1) {
 		omega_of_y = 0.0 - omega_of_y;
 	}
 	if (Mode_Tr[5] == -1) {
-		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f + %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f + %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
+		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f + %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f + %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
 	}
 	else {
-		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f - %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f - %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
+		fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10Lf %.10Lf %.10Lf 0 0 0 0 %.10Lf \"x, y, z, cr, cg, cb = %.10f * sin(%.10f - %.10f * t)+0.5, %.10f*sin(t*%.10f), %.10f * cos(%.10f - %.10f * t)+0.5, cos(2*PI*t/(%.10f)) / 4 + 0.75, cos(2*PI*t/(%.10f)) / 4 + 0.75, sin(2*PI*t/(%.10f)) / 4 + 0.75\" 1 %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" %.10Lf\n", deltaT2, Center.x, y1 + 0.5, Center.z, deltaT * Lamta, R, Omega_0, Omega, R_of_Y, omega_of_y, R, Omega_0, Omega, deltaT * Lamta, deltaT * Lamta, deltaT * Lamta, (int)Lamta, 0.5);
 	}
 	Init_T[5] = 1;
 	Mode_of_Y[5] *= -1;
@@ -3021,56 +3046,56 @@ void BFLLLLLLLLL(long double x1, long double x2, long double y1, long double y2,
 }
 
 void spiral_lines_lisan(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
-	//ÇóÆ½¾ùËÙ¶È£¨Ö±ÏßÒÆ¶¯ËÙ¶È£©
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	int deltaT2 = (int)abs(x2 - x1);//×ª»»ÎªÕûĞÎ
-	long double vz = ((z2 - z1) / deltaT);//²ÎÊı·½³Ì£¨ZÖá£©
-	long double vx = ((x2 - x1) / deltaT);//²ÎÊı·½³Ì£¨XÎª²ÎÊı£©
-	long double vy = ((y2 - y1) / deltaT);//²ÎÊı·½³Ì£¨YÖá£©
-	long double s = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));//Â·³Ì
-	long double h = y2 - y1;//¸ß¶È
-	long double theta = atan((x2 - x1) / (z2 - z1));//Ë®Æ½Æ«×ª½Ç
-	long double phi = atan(h / s);//ÊúÖ±Æ«×ª½Ç
-	long double omega = 4 * deltaT * pi / (Lamta * s);//×ªËÙ
+	//æ±‚å¹³å‡é€Ÿåº¦ï¼ˆç›´çº¿ç§»åŠ¨é€Ÿåº¦ï¼‰
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	int deltaT2 = (int)abs(x2 - x1);//è½¬æ¢ä¸ºæ•´å½¢
+	long double vz = ((z2 - z1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆZè½´ï¼‰
+	long double vx = ((x2 - x1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆXä¸ºå‚æ•°ï¼‰
+	long double vy = ((y2 - y1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆYè½´ï¼‰
+	long double s = sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));//è·¯ç¨‹
+	long double h = y2 - y1;//é«˜åº¦
+	long double theta = atan((x2 - x1) / (z2 - z1));//æ°´å¹³åè½¬è§’
+	long double phi = atan(h / s);//ç«–ç›´åè½¬è§’
+	long double omega = 4 * deltaT * pi / (Lamta * s);//è½¬é€Ÿ
 	long double AAA = s / 6;
-	long double omega2 = pi / (Lamta * s);//×ªËÙ
-	int x_1 = (int)x1;//ÆğÊ¼Ê±¼ä
-	int x_2 = (int)x2;//ÖÕÖ¹Ê±¼ä
-	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //Ã¿Ò»¿Ì¼ÆËãµÄ´ÎÊı
-	long double NumBC_ = 1.0000000 / NumBC;//Ã¿´Î¼ÆËãµÄ²ÎÊıµİÔöÁ¿
+	long double omega2 = pi / (Lamta * s);//è½¬é€Ÿ
+	int x_1 = (int)x1;//èµ·å§‹æ—¶é—´
+	int x_2 = (int)x2;//ç»ˆæ­¢æ—¶é—´
+	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //æ¯ä¸€åˆ»è®¡ç®—çš„æ¬¡æ•°
+	long double NumBC_ = 1.0000000 / NumBC;//æ¯æ¬¡è®¡ç®—çš„å‚æ•°é€’å¢é‡
 	long double r_r = 4;
-	//ÂİÏß×î´ó°ë¾¶
+	//èºçº¿æœ€å¤§åŠå¾„
 
-	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = 0+(%.10f * t - (%.10f*sin(t*%.10f)^2 * ((cos(%.10f) * cos(%.10f * t)) + (sin(%.10f) * sin(%.10f) * sin(%.10f * t)))) + 0.5), %.10f * t + (%.10f*sin(t*%.10f) * (cos(%.10f) * sin(%.10f * t))) + 0.5, %.10f * t + (%.10f*sin(t*%.10f)^2 * ((sin(%.10f) * cos(%.10f * t)) - (cos(%.10f) * sin(%.10f) * sin(%.10f * t)))) + 0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" 0.5\n", x_1, x1, y1, z1, deltaT2, vx, r_r, pi / deltaT, theta, omega, theta, phi, omega, vy, r_r, pi / deltaT, phi, omega, vz, r_r, pi / deltaT, theta, omega, theta, phi, omega, NumBC_, (int)NumBC);
-	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = 0+(%.10f * t - (%.10f*sin(t*%.10f)^2 * ((cos(%.10f) * cos(%.10f * t + (3.1415926535))) + (sin(%.10f) * sin(%.10f) * sin(%.10f * t+ (3.1415926535))))) + 0.5), %.10f * t + (%.10f*sin(t*%.10f)^2 * (cos(%.10f) * sin(%.10f * t+ (3.1415926535)))) + 0.5, %.10f * t + (%.10f*sin(t*%.10f)^2 * ((sin(%.10f) * cos(%.10f * t+ (3.1415926535))) - (cos(%.10f) * sin(%.10f) * sin(%.10f * t+ (3.1415926535))))) + 0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" 0.5\n", x_1, x1, y1, z1, deltaT2, vx, r_r, pi / deltaT, theta, omega, theta, phi, omega, vy, r_r, pi / deltaT, phi, omega, vz, r_r, pi / deltaT, theta, omega, theta, phi, omega, NumBC_, (int)NumBC);
+	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = 0+(%.10f * t - (%.10f*sin(t*%.10f)^2 * ((cos(%.10f) * cos(%.10f * t)) + (sin(%.10f) * sin(%.10f) * sin(%.10f * t)))) + 0.5), %.10f * t + (%.10f*sin(t*%.10f) * (cos(%.10f) * sin(%.10f * t))) + 0.5, %.10f * t + (%.10f*sin(t*%.10f)^2 * ((sin(%.10f) * cos(%.10f * t)) - (cos(%.10f) * sin(%.10f) * sin(%.10f * t)))) + 0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" 0.5\n", x_1, x1, y1, z1, deltaT2, vx, r_r, pi / deltaT, theta, omega, theta, phi, omega, vy, r_r, pi / deltaT, phi, omega, vz, r_r, pi / deltaT, theta, omega, theta, phi, omega, NumBC_, (int)NumBC);
+	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = 0+(%.10f * t - (%.10f*sin(t*%.10f)^2 * ((cos(%.10f) * cos(%.10f * t + (3.1415926535))) + (sin(%.10f) * sin(%.10f) * sin(%.10f * t+ (3.1415926535))))) + 0.5), %.10f * t + (%.10f*sin(t*%.10f)^2 * (cos(%.10f) * sin(%.10f * t+ (3.1415926535)))) + 0.5, %.10f * t + (%.10f*sin(t*%.10f)^2 * ((sin(%.10f) * cos(%.10f * t+ (3.1415926535))) - (cos(%.10f) * sin(%.10f) * sin(%.10f * t+ (3.1415926535))))) + 0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" 0.5\n", x_1, x1, y1, z1, deltaT2, vx, r_r, pi / deltaT, theta, omega, theta, phi, omega, vy, r_r, pi / deltaT, phi, omega, vz, r_r, pi / deltaT, theta, omega, theta, phi, omega, NumBC_, (int)NumBC);
 
 }
 
 void parabola_line_lisan(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 
-	long double deltaT = abs(x2 - x1);//ÇóÊ±¼ä¼ä¸ô£¨Tick£©
-	int deltaT2 = (int)abs(x2 - x1);//×ª»»ÎªÕûĞÎ
-	long double vz = ((z2 - z1) / deltaT);//²ÎÊı·½³Ì£¨ZÖá£©
-	long double vx = ((x2 - x1) / deltaT);//²ÎÊı·½³Ì£¨XÎª²ÎÊı£©
-	long double s = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//ÇóÎ»ÒÆ
-	int x = (int)x1;//ÆğÊ¼Ê±¼ä
-	int x_2 = (int)x2;//ÖÕÖ¹Ê±¼ä
-	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //Ã¿Ò»¿Ì¼ÆËãµÄ´ÎÊı
-	long double NumBC_ = 1.0000000 / NumBC;//Ã¿´Î¼ÆËãµÄ²ÎÊıµİÔöÁ¿
+	long double deltaT = abs(x2 - x1);//æ±‚æ—¶é—´é—´éš”ï¼ˆTickï¼‰
+	int deltaT2 = (int)abs(x2 - x1);//è½¬æ¢ä¸ºæ•´å½¢
+	long double vz = ((z2 - z1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆZè½´ï¼‰
+	long double vx = ((x2 - x1) / deltaT);//å‚æ•°æ–¹ç¨‹ï¼ˆXä¸ºå‚æ•°ï¼‰
+	long double s = sqrt(s_qrt((x2 - x1)) + s_qrt((z2 - z1)));//æ±‚ä½ç§»
+	int x = (int)x1;//èµ·å§‹æ—¶é—´
+	int x_2 = (int)x2;//ç»ˆæ­¢æ—¶é—´
+	long double NumBC = (long double)((int)(s / deltaT)) * 20.0; //æ¯ä¸€åˆ»è®¡ç®—çš„æ¬¡æ•°
+	long double NumBC_ = 1.0000000 / NumBC;//æ¯æ¬¡è®¡ç®—çš„å‚æ•°é€’å¢é‡
 
 
 	if (abs(z2 - z1) >= deltaT) {
 		Lamta = (long double)((int)(5 * (abs(z2 - z1) / deltaT)));
 	}
-	double H;//Å×ÎïÏß×î¸ßµã
-	double deltaY = y2 - y1;//YÖáÏà¶Ô×ø±ê
-	double deltaX = x2 - x1;//XÖáÏà¶Ô×ø±ê
+	double H;//æŠ›ç‰©çº¿æœ€é«˜ç‚¹
+	double deltaY = y2 - y1;//Yè½´ç›¸å¯¹åæ ‡
+	double deltaX = x2 - x1;//Xè½´ç›¸å¯¹åæ ‡
 
 	if (y2 > y1) {
-		H = 0.2 * s + deltaY;//¸ß¶ÈµÄ¶¨Òå
+		H = 0.2 * s + deltaY;//é«˜åº¦çš„å®šä¹‰
 	}
 	else {
-		H = 0.2 * s;//¸ß¶ÈµÄ¶¨Òå
+		H = 0.2 * s;//é«˜åº¦çš„å®šä¹‰
 	}
 
 	double a;//y=bx(x-a)
@@ -3085,22 +3110,22 @@ void parabola_line_lisan(long double x1, long double x2, long double y1, long do
 	else if (deltaY == 0) {
 		a = deltaX;
 		b = (-4 * H) / (a * a);
-	}//ÇóyÖá²ÎÊı·½³Ì
+	}//æ±‚yè½´å‚æ•°æ–¹ç¨‹
 
-	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = t+0.5, (%.10f*t*(t-%.10f))+0.5, %.10f*t+0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 10\" 0.5\n", x, x1, y1, z1, deltaT2, b, a, vz, NumBC_, (int)NumBC);
+	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 %d \"x, y, z, cr, cg, cb = t+0.5, (%.10f*t*(t-%.10f))+0.5, %.10f*t+0.5, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" %.10f %d 25 \"(vx, vz) = ((random(), random()) - 0.5) * t / 5\" 0.5\n", x, x1, y1, z1, deltaT2, b, a, vz, NumBC_, (int)NumBC);
 }
 
 
 
 
 
-//ÉÏÅ×ÎïÏß(´øÔ²È¦£©
+//ä¸ŠæŠ›ç‰©çº¿(å¸¦åœ†åœˆï¼‰
 void round_parabola_line(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 	parabola_line(x1, x2, y1, y2, z1, z2, 10, "test");
 	print_round(x2, y2, z2);
 }
 
-//ÏÂÅ×ÎïÏß(´øÔ²È¦£©
+//ä¸‹æŠ›ç‰©çº¿(å¸¦åœ†åœˆï¼‰
 void round_parabola_line_r(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 	parabola_line_r(x1, x2, y1 - 20, y2 - 20, z1, z2, 10, "test");
 	print_round(x2, y2, z2);
@@ -3196,7 +3221,7 @@ void round_parabola_line_r(long double x1, long double x2, long double y1, long 
 
 
 
-//ÉÏÏÂÅ×ÎïÏßÖĞĞÄÂİÏßÁ´½Ó(´øÔ²È¦£©
+//ä¸Šä¸‹æŠ›ç‰©çº¿ä¸­å¿ƒèºçº¿é“¾æ¥(å¸¦åœ†åœˆï¼‰
 void round_special_parabola_line(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 	round_parabola_line(x1, x2, y1, y2, z1, z2, 10, "test");
 	round_parabola_line_r(x1, x2, y1 - 20, y2 - 20, z1, z2, 10, "test");
@@ -3204,7 +3229,7 @@ void round_special_parabola_line(long double x1, long double x2, long double y1,
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 10 \"x, y, z, cr, cg, cb = cos(t * (8 * PI / 10)), 0-t, sin(t * (8 * PI / 10)), sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" 0.1 20 25\n", int(x2), x2 + 0.5, y2 + 0.5, z2 + 0.5);
 }
 
-//ÉÏÏÂÅ×ÎïÏßÖĞĞÄÂİÏßÁ´½Ó
+//ä¸Šä¸‹æŠ›ç‰©çº¿ä¸­å¿ƒèºçº¿é“¾æ¥
 void special_parabola_line(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 	parabola_line(x1, x2, y1, y2, z1, z2, 10, "test");
 	parabola_line_r(x1, x2, y1-20, y2-20, z1, z2, 10, "test");
@@ -3212,7 +3237,7 @@ void special_parabola_line(long double x1, long double x2, long double y1, long 
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 10 \"x, y, z, cr, cg, cb = cos(t * (8 * PI / 10)), 0-t, sin(t * (8 * PI / 10)), sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" 0.1 20 25\n", int(x2), x2 + 0.5, y2 + 0.5, z2 + 0.5);
 }
 
-//ÉÏÏÂÅ×ÎïÏßÖĞĞÄÂİÏßÁ´½Ó£¨ÓĞÂİĞıÈ¦Õó£©
+//ä¸Šä¸‹æŠ›ç‰©çº¿ä¸­å¿ƒèºçº¿é“¾æ¥ï¼ˆæœ‰èºæ—‹åœˆé˜µï¼‰
 void special_parabola_line_round(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 	spiral_round_parabola_line(x1, x2, y1, y2, z1, z2, 10, "test");
 	spiral_round_parabola_line_r(x1, x2, y1 - 20, y2 - 20, z1, z2, 10, "test");
@@ -3220,7 +3245,7 @@ void special_parabola_line_round(long double x1, long double x2, long double y1,
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 10 \"x, y, z, cr, cg, cb = cos(t * (8 * PI / 10)), 0-t, sin(t * (8 * PI / 10)), sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" 0.1 20 25\n", int(x2), x2 + 0.5, y2 + 0.5, z2 + 0.5);
 }
 
-//ÉÏÏÂÖ±ÏßÖĞĞÄÂİÏßÁ´½Ó
+//ä¸Šä¸‹ç›´çº¿ä¸­å¿ƒèºçº¿é“¾æ¥
 void special_straight_line(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 	straight_line(x1, x2, y1, y2, z1, z2, 10, "test");
 	straight_line(x1, x2, y1 - 20, y2 - 20, z1, z2, 10, "test");
@@ -3228,7 +3253,7 @@ void special_straight_line(long double x1, long double x2, long double y1, long 
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 10 \"x, y, z, cr, cg, cb = cos(t * (8 * PI / 10)), 0-t, sin(t * (8 * PI / 10)), sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" 0.1 20 25\n", int(x2), x2 + 0.5, y2 + 0.5, z2 + 0.5);
 }
 
-//ÉÏÏÂÅ×ÎïÏßÖĞĞÄÖ±ÏßÁ´½Ó
+//ä¸Šä¸‹æŠ›ç‰©çº¿ä¸­å¿ƒç›´çº¿é“¾æ¥
 void special_parabola_line_s(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 	parabola_line(x1, x2, y1, y2, z1, z2, 10, "test");
 	parabola_line_r(x1, x2, y1 - 20, y2 - 20, z1, z2, 10, "test");
@@ -3236,7 +3261,7 @@ void special_parabola_line_s(long double x1, long double x2, long double y1, lon
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 10 \"y, cr, cg, cb = 0-t, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" 0.1 20 25\n", int(x2), x2 + 0.5, y2 + 0.5, z2 + 0.5);
 }
 
-//ÉÏÏÂÅ×ÎïÏßÖĞĞÄÖ±ÏßÁ´½Ó£¨ÓĞÂİĞıÈ¦Õó£©
+//ä¸Šä¸‹æŠ›ç‰©çº¿ä¸­å¿ƒç›´çº¿é“¾æ¥ï¼ˆæœ‰èºæ—‹åœˆé˜µï¼‰
 void special_parabola_line_s_round(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 	spiral_round_parabola_line(x1, x2, y1, y2, z1, z2, 10, "test");
 	spiral_round_parabola_line_r(x1, x2, y1 - 20, y2 - 20, z1, z2, 10, "test");
@@ -3244,7 +3269,7 @@ void special_parabola_line_s_round(long double x1, long double x2, long double y
 	fprintf(file1, "execute if score @p Timer matches %d run particleex rgbatickparameter minecraft:end_rod %.10f %.10f %.10f 0 0 0 0 10 \"y, cr, cg, cb = 0-t, sin(t/7)/2+0.5, cos(t/5)/2+0.5, sin(t/3)/2+0.5\" 0.1 20 25\n", int(x2), x2 + 0.5, y2 + 0.5, z2 + 0.5);
 }
 
-//ÉÏÏÂÖ±ÏßÖĞĞÄÖ±ÏßÁ´½Ó
+//ä¸Šä¸‹ç›´çº¿ä¸­å¿ƒç›´çº¿é“¾æ¥
 void special_straight_line_s(long double x1, long double x2, long double y1, long double y2, long double z1, long double z2, long double Lamta, string ABCD) {
 	straight_line(x1, x2, y1, y2, z1, z2, 10, "test");
 	straight_line(x1, x2, y1 - 20, y2 - 20, z1, z2, 10, "test");
