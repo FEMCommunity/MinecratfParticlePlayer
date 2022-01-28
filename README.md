@@ -94,7 +94,7 @@
 &emsp;&emsp;&emsp;&emsp;MIDI文件编辑<br>
 &emsp;&emsp;&emsp;&emsp;MIDI文件导出<br>
 ### &emsp;Playsound：
-&emsp;&emsp;&emsp;&emsp;自动处理播放声音指令<br>
+&emsp;&emsp;&emsp;&emsp;<del>自动处理播放声音指令</del><br>
 &emsp;&emsp;&emsp;&emsp;适配各个网络上存在的音源资源包<br>
 ### &emsp;setblock：
 &emsp;&emsp;&emsp;&emsp;<del>在每一个音符处放置方块</del><br>
