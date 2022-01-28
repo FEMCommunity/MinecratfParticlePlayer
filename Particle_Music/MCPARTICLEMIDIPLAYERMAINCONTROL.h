@@ -1,37 +1,38 @@
 #ifndef MCPARTICLEMIDIPLAYERMAINCONTROL_
 #define MCPARTICLEMIDIPLAYERMAINCONTROL_
 #pragma warning(disable : 4996)
-#include "D:\VisualStudioProj\MCÏà¹Ø\Particle_Music\Particle_file_control.h"
+#include "D:\VisualStudioProj\MCç›¸å…³\Particle_Music\Particle_file_control.h"
 int StartPos[2];
 int TempYPos = 80;
 char ParMode = 'a';
 int Tem_SCANF;
+char TemArr_SB[255] = "minecraft:sea_lantern\0";
 void Tran_MODEA() {//A
-	printf("\n\n\n\nÇëÊäÈëÒ»ÇĞµÄÆğµã×ø±ê£¨x z£©£º\n");
+	printf("\n\n\n\nè¯·è¾“å…¥ä¸€åˆ‡çš„èµ·ç‚¹åæ ‡ï¼ˆx zï¼‰ï¼š\n");
 	Tem_SCANF = Tem_SCANF = scanf("%d %d", StartPos, StartPos+1);
 
 	for (int i = 0; i < (int)MIDI_INFO_PARTICLE.size(); i++) {
 		for (int j = 1; j < (int)MIDI_INFO_PARTICLE[i].size(); j++) {
 			if (i == 0) {
-				straight_line(*StartPos, MIDI_INFO_PARTICLE[i][0], TempYPos, TempYPos, *(StartPos + 1), MIDI_INFO_PARTICLE[i][j], 20, "Tem");//½«´Ëº¯ÊıÃûÓëÏÂÒ»¸öelseÖĞº¯ÊıÃû¸ÄÎªParticle.hÖĞµÄÈÎºÎÒ»¸ö»æÖÆÏßÌõ·Ö×éÖĞ·ÇÁ¬ĞøÏàÇĞÔ²µÄº¯Êı¿É¸Ä±äÏßÌõÀàĞÍ
+				straight_line(*StartPos, MIDI_INFO_PARTICLE[i][0], TempYPos, TempYPos, *(StartPos + 1), MIDI_INFO_PARTICLE[i][j], 20, "Tem");//å°†æ­¤å‡½æ•°åä¸ä¸‹ä¸€ä¸ªelseä¸­å‡½æ•°åæ”¹ä¸ºParticle.hä¸­çš„ä»»ä½•ä¸€ä¸ªç»˜åˆ¶çº¿æ¡åˆ†ç»„ä¸­éè¿ç»­ç›¸åˆ‡åœ†çš„å‡½æ•°å¯æ”¹å˜çº¿æ¡ç±»å‹
 			}
 			else {
 				straight_line(MIDI_INFO_PARTICLE[i-1][0], MIDI_INFO_PARTICLE[i][0], TempYPos, TempYPos, MIDI_INFO_PARTICLE[i-1][1], MIDI_INFO_PARTICLE[i][j], 20, "Tem");
 			}
 		}
 	}
-	printf("×ª»»½áÊø\n");
+	printf("è½¬æ¢ç»“æŸ\n");
 	return;
 }
 
 void Tran_MODEB() {//B
-	printf("\n\n\n\nÇëÊäÈëÒ»ÇĞµÄÆğµã×ø±ê£¨x z£©£º\n");
+	printf("\n\n\n\nè¯·è¾“å…¥ä¸€åˆ‡çš„èµ·ç‚¹åæ ‡ï¼ˆx zï¼‰ï¼š\n");
 	Tem_SCANF = Tem_SCANF = scanf("%d %d", StartPos, StartPos + 1);
 
 	for (int i = 0; i < (int)MIDI_INFO_PARTICLE.size(); i++) {
 		for (int j = 1; j < (int)MIDI_INFO_PARTICLE[i].size(); j++) {
 			if (i == 0) {
-				straight_line(*StartPos, MIDI_INFO_PARTICLE[i][0], TempYPos, TempYPos, *(StartPos + 1), MIDI_INFO_PARTICLE[i][j], 20, "Tem");//½«´Ëº¯ÊıÃûÓëÏÂÒ»¸öelseÖĞº¯ÊıÃû¸ÄÎªParticle.hÖĞµÄÈÎºÎÒ»¸ö»æÖÆÏßÌõ·Ö×éÖĞ·ÇÁ¬ĞøÏàÇĞÔ²µÄº¯Êı¿É¸Ä±äÏßÌõÀàĞÍ
+				straight_line(*StartPos, MIDI_INFO_PARTICLE[i][0], TempYPos, TempYPos, *(StartPos + 1), MIDI_INFO_PARTICLE[i][j], 20, "Tem");//å°†æ­¤å‡½æ•°åä¸ä¸‹ä¸€ä¸ªelseä¸­å‡½æ•°åæ”¹ä¸ºParticle.hä¸­çš„ä»»ä½•ä¸€ä¸ªç»˜åˆ¶çº¿æ¡åˆ†ç»„ä¸­éè¿ç»­ç›¸åˆ‡åœ†çš„å‡½æ•°å¯æ”¹å˜çº¿æ¡ç±»å‹
 			}
 			else {
 				if (i > (int)MIDI_INFO_PARTICLE[i - 1].size()) {
@@ -44,18 +45,18 @@ void Tran_MODEB() {//B
 			}
 		}
 	}
-	printf("×ª»»½áÊø\n");
+	printf("è½¬æ¢ç»“æŸ\n");
 	return;
 }
 
 void Tran_MODEC() {//C
-	printf("\n\n\n\nÇëÊäÈëÒ»ÇĞµÄÆğµã×ø±ê£¨x z£©£º\n");
+	printf("\n\n\n\nè¯·è¾“å…¥ä¸€åˆ‡çš„èµ·ç‚¹åæ ‡ï¼ˆx zï¼‰ï¼š\n");
 	Tem_SCANF = Tem_SCANF = scanf("%d %d", StartPos, StartPos + 1);
 
 	for (int i = 0; i < (int)MIDI_INFO_PARTICLE.size(); i++) {
 		for (int j = 1; j < (int)MIDI_INFO_PARTICLE[i].size(); j++) {
 			if (i == 0) {
-				straight_line(*StartPos, MIDI_INFO_PARTICLE[i][0], TempYPos, TempYPos, *(StartPos + 1), MIDI_INFO_PARTICLE[i][j], 20, "Tem");//½«´Ëº¯ÊıÃûÓëÏÂÒ»¸öelseÖĞº¯ÊıÃû¸ÄÎªParticle.hÖĞµÄÈÎºÎÒ»¸ö»æÖÆÏßÌõ·Ö×éÖĞ·ÇÁ¬ĞøÏàÇĞÔ²µÄº¯Êı¿É¸Ä±äÏßÌõÀàĞÍ
+				straight_line(*StartPos, MIDI_INFO_PARTICLE[i][0], TempYPos, TempYPos, *(StartPos + 1), MIDI_INFO_PARTICLE[i][j], 20, "Tem");//å°†æ­¤å‡½æ•°åä¸ä¸‹ä¸€ä¸ªelseä¸­å‡½æ•°åæ”¹ä¸ºParticle.hä¸­çš„ä»»ä½•ä¸€ä¸ªç»˜åˆ¶çº¿æ¡åˆ†ç»„ä¸­éè¿ç»­ç›¸åˆ‡åœ†çš„å‡½æ•°å¯æ”¹å˜çº¿æ¡ç±»å‹
 			}
 			else {
 				straight_line(MIDI_INFO_PARTICLE[i - 1][0], MIDI_INFO_PARTICLE[i][0], TempYPos, TempYPos, MIDI_INFO_PARTICLE[i - 1][1], MIDI_INFO_PARTICLE[i][j], 20, "Tem");
@@ -67,18 +68,18 @@ void Tran_MODEC() {//C
 			}
 		}
 	}
-	printf("×ª»»½áÊø\n");
+	printf("è½¬æ¢ç»“æŸ\n");
 	return;
 }
 
 void Tran_MODED() {//D
-	printf("\n\n\n\nÇëÊäÈëÒ»ÇĞµÄÆğµã×ø±ê£¨x z£©£º\n");
+	printf("\n\n\n\nè¯·è¾“å…¥ä¸€åˆ‡çš„èµ·ç‚¹åæ ‡ï¼ˆx zï¼‰ï¼š\n");
 	Tem_SCANF = Tem_SCANF = scanf("%d %d", StartPos, StartPos + 1);
 
 	for (int i = 0; i < (int)MIDI_INFO_PARTICLE.size(); i++) {
 		for (int j = 1; j < (int)MIDI_INFO_PARTICLE[i].size(); j++) {
 			if (i == 0) {
-				straight_line(*StartPos, MIDI_INFO_PARTICLE[i][0], TempYPos, TempYPos, *(StartPos + 1), MIDI_INFO_PARTICLE[i][j], 20, "Tem");//½«´Ëº¯ÊıÃûÓëÏÂÒ»¸öelseÖĞº¯ÊıÃû¸ÄÎªParticle.hÖĞµÄÈÎºÎÒ»¸ö»æÖÆÏßÌõ·Ö×éÖĞ·ÇÁ¬ĞøÏàÇĞÔ²µÄº¯Êı¿É¸Ä±äÏßÌõÀàĞÍ
+				straight_line(*StartPos, MIDI_INFO_PARTICLE[i][0], TempYPos, TempYPos, *(StartPos + 1), MIDI_INFO_PARTICLE[i][j], 20, "Tem");//å°†æ­¤å‡½æ•°åä¸ä¸‹ä¸€ä¸ªelseä¸­å‡½æ•°åæ”¹ä¸ºParticle.hä¸­çš„ä»»ä½•ä¸€ä¸ªç»˜åˆ¶çº¿æ¡åˆ†ç»„ä¸­éè¿ç»­ç›¸åˆ‡åœ†çš„å‡½æ•°å¯æ”¹å˜çº¿æ¡ç±»å‹
 			}
 			else {
 				if (i > (int)MIDI_INFO_PARTICLE[i - 1].size()) {
@@ -95,36 +96,36 @@ void Tran_MODED() {//D
 			}
 		}
 	}
-	printf("×ª»»½áÊø\n");
+	printf("è½¬æ¢ç»“æŸ\n");
 	return;
 }
-
 void StartProject() {
-	file1 = fopen("Temp.mcfunction", "a+");//ĞŞ¸ÄÎÄ¼şÃû
+	file1 = fopen("Temp.mcfunction", "a+");//ä¿®æ”¹æ–‡ä»¶å
 	open_file();
 	load_txt_file();
-	printf("Ã¿Ò»ĞĞ¼´ÎªÍ¬Ò»TµÄÒô·û£º\n");
+	printf("æ¯ä¸€è¡Œå³ä¸ºåŒä¸€Tçš„éŸ³ç¬¦ï¼š\n");
 	print_txt_file();
 	PARTICLE_ERROR0_:
-	printf("\n\n\n\n\nÇëÊäÈëy×ø±ê£¨>0)£ºy = ");
+	printf("\n\n\n\n\nè¯·è¾“å…¥yåæ ‡ï¼ˆ>0)ï¼šy = ");
 	Tem_SCANF = scanf("%d", &TempYPos);
 	if (TempYPos <= 0) {
-		printf("ÊäÈë¸ñÊ½´íÎó");
+		printf("è¾“å…¥æ ¼å¼é”™è¯¯");
 		goto PARTICLE_ERROR0_;
 	}
 	else {
 		PARTICLE_ERROR1_:
-		printf("\n\n\n\n\nÇëÊäÈëÄ£Ê½£¨ABCD£©£º\nÄ£Ê½A£¨Ã¿Ò»´Î·ÖÖ§³öµÄÏßÌõ²»¾ÛºÏ£¬ÇÒÃ¿Ò»´Î·ÖÖ§µÄÆğµãÎª¶ÁÈëµÄµÚÒ»¸öÒô·ûµÄ×ø±ê£©\nÄ£Ê½B£¨Ã¿Ò»´Î·ÖÖ§³öµÄÏßÌõ²»¾ÛºÏ£¬ÇÒÃ¿Ò»´Î·ÖÖ§µÄÆğµãÎª¶ÁÈë´ÎĞòÏàÍ¬µÄÒô·û£¬Èô±¾ĞĞÒô·ûÊıÄ¿´óÓÚÉÏÒ»ĞĞ£¬Ôò¶à³ö²¿·Ö´Ó¶ÁÈëµÄ×îºóÒ»¸öÆğÊ¼£©\nÄ£Ê½C£¨Ã¿Ò»´Î·ÖÖ§³öµÄÏßÌõ»á¾ÛºÏ£¬¾ÛºÏµã¶ÁÈëµÄµÚÒ»¸öÒô·ûµÄ×ø±ê£©\nÄ£Ê½D£¨Ã¿Ò»´Î·ÖÖ§³öµÄÏßÌõ»á¾ÛºÏ£¬¾ÛºÏµã¹æÔòÀàËÆÓÚBÄ£Ê½£©\nÄ£Ê½ = ");
-		Tem_SCANF = scanf("%c", &ParMode);//ÓÃÓÚ»ØÊÕÊäÈëÁ÷ÖĞÉÏÒ»´ÎÊäÈëµÄµÄ»Ø³µ·ûºÅ
+		printf("\n\n\n\n\nè¯·è¾“å…¥æ¨¡å¼ï¼ˆABCDï¼‰ï¼š\næ¨¡å¼Aï¼ˆæ¯ä¸€æ¬¡åˆ†æ”¯å‡ºçš„çº¿æ¡ä¸èšåˆï¼Œä¸”æ¯ä¸€æ¬¡åˆ†æ”¯çš„èµ·ç‚¹ä¸ºè¯»å…¥çš„ç¬¬ä¸€ä¸ªéŸ³ç¬¦çš„åæ ‡ï¼‰\næ¨¡å¼Bï¼ˆæ¯ä¸€æ¬¡åˆ†æ”¯å‡ºçš„çº¿æ¡ä¸èšåˆï¼Œä¸”æ¯ä¸€æ¬¡åˆ†æ”¯çš„èµ·ç‚¹ä¸ºè¯»å…¥æ¬¡åºç›¸åŒçš„éŸ³ç¬¦ï¼Œè‹¥æœ¬è¡ŒéŸ³ç¬¦æ•°ç›®å¤§äºä¸Šä¸€è¡Œï¼Œåˆ™å¤šå‡ºéƒ¨åˆ†ä»è¯»å…¥çš„æœ€åä¸€ä¸ªèµ·å§‹ï¼‰\næ¨¡å¼Cï¼ˆæ¯ä¸€æ¬¡åˆ†æ”¯å‡ºçš„çº¿æ¡ä¼šèšåˆï¼Œèšåˆç‚¹è¯»å…¥çš„ç¬¬ä¸€ä¸ªéŸ³ç¬¦çš„åæ ‡ï¼‰\næ¨¡å¼Dï¼ˆæ¯ä¸€æ¬¡åˆ†æ”¯å‡ºçš„çº¿æ¡ä¼šèšåˆï¼Œèšåˆç‚¹è§„åˆ™ç±»ä¼¼äºBæ¨¡å¼ï¼‰\næ¨¡å¼ = ");
+		Tem_SCANF = scanf("%c", &ParMode);//ç”¨äºå›æ”¶è¾“å…¥æµä¸­ä¸Šä¸€æ¬¡è¾“å…¥çš„çš„å›è½¦ç¬¦å·
 		Tem_SCANF = scanf("%c", &ParMode);
 		switch (ParMode) {
 		case 'A': Tran_MODEA(); break;
 		case 'B': Tran_MODEB(); break;
 		case 'C': Tran_MODEC(); break;
 		case 'D': Tran_MODED(); break;
-		default: printf("´íÎó£¬ÇëÊäÈë´óĞ´A B C DÖĞµÄÒ»¸ö\n"); goto PARTICLE_ERROR1_; break;
+		default: printf("é”™è¯¯ï¼Œè¯·è¾“å…¥å¤§å†™A B C Dä¸­çš„ä¸€ä¸ª\n"); goto PARTICLE_ERROR1_; break;
 		}
 	}
+	fclose(file1);
 	return;
 }
 
@@ -142,33 +143,54 @@ void Tran_MODEROUND() {//ROUND
 			}
 		}
 	}
-	printf("×ª»»½áÊø\n");
+	printf("è½¬æ¢ç»“æŸ\n");
 	return;
 }
 
 void StartRound() {
-	file1 = fopen("Temp.mcfunction", "a+");//ĞŞ¸ÄÎÄ¼şÃû
+	file1 = fopen("Temp.mcfunction", "a+");//ä¿®æ”¹æ–‡ä»¶å
 	open_file();
 	load_txt_file();
-	printf("Ã¿Ò»ĞĞ¼´ÎªÍ¬Ò»TµÄÒô·û£º\n");
+	printf("æ¯ä¸€è¡Œå³ä¸ºåŒä¸€Tçš„éŸ³ç¬¦ï¼š\n");
 	print_txt_file();
-PARTICLE_ERROR0_:
-	printf("\n\n\n\n\nÇëÊäÈëy×ø±ê£¨>0)£ºy = ");
+	PARTICLE_ERROR2_:
+	printf("\n\n\n\n\nè¯·è¾“å…¥yåæ ‡ï¼ˆ>0)ï¼šy = ");
 	Tem_SCANF = scanf("%d", &TempYPos);
 	if (TempYPos <= 0) {
-		printf("ÊäÈë¸ñÊ½´íÎó");
-		goto PARTICLE_ERROR0_;
+		printf("è¾“å…¥æ ¼å¼é”™è¯¯");
+		goto PARTICLE_ERROR2_;
 	}
 	else {
 		Tran_MODEROUND();
 	}
+	fclose(file1);
 	return;
 }
 
+//execute if score @p Timer matches 5385 run execute as @p at @p run playsound flp.80 player @a ~ ~ ~ 0.64 1
 
+void playsound_setblock() {
+	file1 = fopen("Temp.mcfunction", "a+");
+	open_sound_block_file();
+	load_SB_Particle_file();
+	print_SB_file();
+	for (int i = 0; i < (int)SBNOTEINFO.size(); i++) {
+		fprintf(file1, "execute if score @p Timer matches %d run execute as @p at @p run playsound flp.%d player @a ~ ~ ~ %.2f 1\n", SBNOTEINFO[i][0], SBNOTEINFO[i][1], (double)SBNOTEINFO[i][2] / 100.0);
+		fprintf(file1, "execute if score @p Timer matches %d run setblock %d %d %d %s replace\n", SBNOTEINFO[i][0], SBNOTEINFO[i][0], TempYPos, SBNOTEINFO[i][1], TemArr_SB);
+	}
+	fclose(file1);
+}
 
-
-
+void EndParticle() {
+	file1 = fopen("Temp.mcfunction", "a+");
+	open_sound_block_file();
+	load_SB_Particle_file();
+	print_SB_file();
+	for (int i = 0; i < (int)SBNOTEINFO.size(); i++) {
+		brust(SBNOTEINFO[i][0], TempYPos, SBNOTEINFO[i][1]);
+	}
+	fclose(file1);
+}
 
 
 
