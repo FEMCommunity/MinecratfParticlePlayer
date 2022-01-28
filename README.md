@@ -75,8 +75,12 @@
 &emsp;&emsp;&emsp;&emsp;<del>星型线</del><br>
 &emsp;&emsp;&emsp;&emsp;<del>倒映形线条</del><br>
 &emsp;&emsp;&emsp;&emsp;<del>线条消失前散开</del><br>
-&emsp;&emsp;&emsp;&emsp;贝塞尔曲线。<br>
-&emsp;&emsp;&emsp;&emsp;傅里叶变换。<br>
+&emsp;&emsp;&emsp;&emsp;贝塞尔曲线<br>
+&emsp;&emsp;&emsp;&emsp;傅里叶变换<br>
+&emsp;&emsp;&emsp;&emsp;钱学森弹道轨迹<br>
+&emsp;&emsp;&emsp;&emsp;随机轨迹曲线<br>
+&emsp;&emsp;&emsp;&emsp;<del>七影蝶飞行</del><br>
+&emsp;&emsp;&emsp;&emsp;心形“抛物线”<br>
 #### &emsp;&emsp;音符特效：
 &emsp;&emsp;&emsp;&emsp;<del>扩大的圆圈</del><br>
 &emsp;&emsp;&emsp;&emsp;<del>螺旋线</del><br>
