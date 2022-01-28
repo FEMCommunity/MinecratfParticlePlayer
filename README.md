@@ -58,6 +58,10 @@
 &emsp;&emsp;&emsp;&emsp; **6.**   再次运行函数，会在根目录生成一个Temp.mcfunction的文件，重命名之，将<br>&emsp;&emsp;&emsp;&emsp;其中Temp改为纯小写字母组成的字符串。<br>
 &emsp;&emsp;&emsp;&emsp; **7.**   放入datapack的function文件夹内，进入存档，使用循环命令方块调用<br>&emsp;&emsp;&emsp;&emsp;（不包含播放声音的函数，是因为大家用的音源资源包都不一样，如果需要<br>&emsp;&emsp;&emsp;&emsp;以后会加上）<br>
 
+
+> 1月28日更新：加入了新的两个函数（playsound_setblock和EndParticle）前者是自动playsound和setblock，后者是末点特效，运行这两个函数均会在根目录下创建一个Input_SB.txt，这个文件与input.txt的区别是在input.txt的基础上加入了一列力度（音量）。可以通过修改EndParticle中For循环中函数来实现切换末点特效。
+
+
 ## 将要做的
 ---
 ### &emsp;更多粒子特效：
@@ -89,7 +93,7 @@
 &emsp;&emsp;&emsp;&emsp;自动处理播放声音指令<br>
 &emsp;&emsp;&emsp;&emsp;适配各个网络上存在的音源资源包<br>
 ### &emsp;setblock：
-&emsp;&emsp;&emsp;&emsp;在每一个音符处放置方块<br>
+&emsp;&emsp;&emsp;&emsp;<del>在每一个音符处放置方块</del><br>
 ### &emsp;可视化界面：
 &emsp;&emsp;&emsp;&emsp;.exe可执行程序，可视化界面操作<br>
 ### &emsp;基岩版适配：
